@@ -22,3 +22,22 @@ person is not health conscious. So, for monitoring purposes applications are nee
 
 Have a prediction model to find diseases from parameters so that precautions can be taken
 beforehand.
+
+#### Design
+
+##### Mobile Application - Single User
+
+Screen 1
+
+UI to show the health parameters value as
+mentioned above. After getting the values
+from wearable to smartphone upload the
+values in your personal cloud like firebase
+for every 30 seconds.
+
+Screen 2 
+
+Option to add manual data with body text or
+document like medical records and view
+them whenever needed. 
+
