@@ -43,8 +43,17 @@ Screen 2
 document like medical records and view
 them whenever needed. 
 
-Web Application
-(To manage multiple users health)
+- Chatbot that gives the health condition status and helps to find the medical records from
+the earlier list uploaded based on file name and provides fitness queries.
+
+- FItbit/Google fit integration
+
+- BlockChain Security
+
+- IMEI identification (Unique ID)
+
+##### Web Application (To manage multiple users health)
+
 Page 1:
 
 - Now from the database that contains all
@@ -58,3 +67,10 @@ Page 2:
 - View the medical records of all the users
 based the username search criteria and list
 them wisely.
+
+
+##### Email Automation
+
+Email Automation that runs daily at the end of the day which collects the user’s health
+information and provides their condition of their health summary for each and every user.
+SMS/ Email upon major critical health warning such as reducing sugar level, asthma, etc.
