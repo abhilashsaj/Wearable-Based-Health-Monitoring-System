@@ -43,3 +43,18 @@ Screen 2
 document like medical records and view
 them whenever needed. 
 
+Web Application
+(To manage multiple users health)
+Page 1:
+
+- Now from the database that contains all
+users records with their health information.
+Visualize their health information based on
+critical and normal values for each and every
+parameter mentioned above. 
+
+Page 2:
+
+- View the medical records of all the users
+based the username search criteria and list
+them wisely.
