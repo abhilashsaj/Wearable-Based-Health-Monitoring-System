@@ -29,15 +29,17 @@ beforehand.
 
 Screen 1
 
-UI to show the health parameters value as
-mentioned above. After getting the values
+- UI to show the health parameters value as
+mentioned above. 
+
+- After getting the values
 from wearable to smartphone upload the
 values in your personal cloud like firebase
 for every 30 seconds.
 
 Screen 2 
 
-Option to add manual data with body text or
+- Option to add manual data with body text or
 document like medical records and view
 them whenever needed. 
 
