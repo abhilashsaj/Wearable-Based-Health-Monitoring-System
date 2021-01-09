@@ -27,7 +27,7 @@ beforehand.
 
 ##### Mobile Application - Single User
 
-Screen 1
+###### Screen 1
 
 - UI to show the health parameters value as
 mentioned above. 
@@ -37,7 +37,7 @@ from wearable to smartphone upload the
 values in your personal cloud like firebase
 for every 30 seconds.
 
-Screen 2 
+###### Screen 2 
 
 - Option to add manual data with body text or
 document like medical records and view
@@ -54,7 +54,7 @@ the earlier list uploaded based on file name and provides fitness queries.
 
 ##### Web Application (To manage multiple users health)
 
-Page 1:
+###### Page 1:
 
 - Now from the database that contains all
 users records with their health information.
@@ -62,7 +62,7 @@ Visualize their health information based on
 critical and normal values for each and every
 parameter mentioned above. 
 
-Page 2:
+###### Page 2:
 
 - View the medical records of all the users
 based the username search criteria and list
