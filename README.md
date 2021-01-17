@@ -29,8 +29,9 @@ beforehand.
 
 ###### Screen 1
 
-- UI to show the health parameters value as
-mentioned above. 
+- User Log In/ Sign Up
+
+- UI to show the health parameters from IOT/Open API
 
 - After getting the values
 from wearable to smartphone upload the
