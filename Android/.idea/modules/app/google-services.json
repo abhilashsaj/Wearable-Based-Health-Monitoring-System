@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "598917445307",
+    "project_id": "svasthya-11bed",
+    "storage_bucket": "svasthya-11bed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598917445307:android:0b4d4e9f4a067c05db5b9e",
+        "android_client_info": {
+          "package_name": "com.example.svasthya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598917445307-tgfi6nddpsh36mjbes7gj9h7bhro0ea8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.svasthya",
+            "certificate_hash": "19e61db89124733d249daf0ed52428b2f812de35"
+          }
+        },
+        {
+          "client_id": "598917445307-9v5r69np2v3ecffjdcm56t1q52hngkgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEX1-Ji5BjD4n1WJNIfBqmvhA4iNuWXqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598917445307-9v5r69np2v3ecffjdcm56t1q52hngkgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
