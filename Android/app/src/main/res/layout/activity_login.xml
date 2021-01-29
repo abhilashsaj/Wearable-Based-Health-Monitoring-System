@@ -12,7 +12,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="365dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
         android:hint="Email"
@@ -29,7 +29,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
-        android:layout_width="365dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:hint="Password"
@@ -47,18 +47,18 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="148dp"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="365dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/grad_blue"
@@ -81,7 +81,7 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -90,7 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="signUp"
         android:text="Sign up"
         android:textColor="@android:color/black"
         android:textSize="16sp"

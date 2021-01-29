@@ -44,7 +44,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="365dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/grad_blue"
@@ -52,14 +52,19 @@
         android:text="Login"
         android:textColor="@android:color/white"
         android:textSize="16sp"
+        android:bottomRightRadius="20dp"
+        android:bottomLeftRadius="20dp"
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="365dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/white"
