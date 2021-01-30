@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,10 +47,39 @@ public class HomeActivity extends AppCompatActivity {
     private String cholestorol;
     private String oxygen_saturation;
 
+    private TextView post_meal_textview;
+    private TextView blood_sugar_level_textview;
+    private TextView breaths_per_minute_textview;
+    private TextView is_running_textview;
+    private TextView breath_shortness_severity_textview;
+    private TextView cough_frequency_textview;
+    private TextView cough_severity_textview;
+    private TextView blood_pressure_sys_textview;
+    private TextView blood_pressure_dia_textview;
+    private TextView heart_rate_textview;
+    private TextView cholestorol_textview;
+    private TextView oxygen_saturation_textview;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        post_meal_textview = (TextView)findViewById(R.id.post_meal);
+        blood_sugar_level_textview = (TextView)findViewById(R.id.blood_sugar_level);
+        breaths_per_minute_textview = (TextView)findViewById(R.id.breaths_per_minute);
+        is_running_textview = (TextView)findViewById(R.id.is_running);
+        breath_shortness_severity_textview = (TextView)findViewById(R.id.breath_shortness_severity);
+        cough_frequency_textview = (TextView)findViewById(R.id.cough_frequency);
+        cough_severity_textview = (TextView)findViewById(R.id.cough_severity);
+        blood_pressure_sys_textview = (TextView)findViewById(R.id.blood_pressure_sys);
+        blood_pressure_dia_textview = (TextView)findViewById(R.id.blood_pressure_dia);
+        heart_rate_textview = (TextView)findViewById(R.id.heart_rate);
+        cholestorol_textview = (TextView)findViewById(R.id.cholestorol);
+        oxygen_saturation_textview = (TextView)findViewById(R.id.oxygen_saturation);
+
+        
 
         connect = findViewById(R.id.connect);
         connect.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +145,20 @@ public class HomeActivity extends AppCompatActivity {
                             cholestorol =  obj.getString("cholestorol");
                             oxygen_saturation =  obj.getString("oxygen_saturation");
 
-//                            Toast.makeText(HomeActivity.this, obj.getString("cholestorol"), Toast.LENGTH_LONG).show();
+                            post_meal_textview.setText(post_meal);
+                            blood_sugar_level_textview.setText(blood_sugar_level);
+                            breaths_per_minute_textview.setText(breaths_per_minute);
+                            is_running_textview.setText(is_running);
+                            breath_shortness_severity_textview.setText(breath_shortness_severity);
+                            cough_frequency_textview.setText(cough_frequency);
+                            cough_severity_textview.setText(cough_severity);
+                            blood_pressure_sys_textview.setText(blood_pressure_sys);
+                            blood_pressure_dia_textview.setText(blood_pressure_dia);
+                            heart_rate_textview.setText(heart_rate);
+                            cholestorol_textview.setText(cholestorol);
+                            oxygen_saturation_textview.setText(oxygen_saturation);
+
+                            Toast.makeText(HomeActivity.this, obj.toString() + " "+ blood_sugar_level, Toast.LENGTH_LONG).show();
                         } catch (IOException | JSONException e) {
                             e.printStackTrace();
                         }
@@ -131,5 +175,9 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(HomeActivity.this, MainActivity.class));
         finish();
+    }
+
+    public void syncValues(View view) {
+
     }
 }
