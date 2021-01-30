@@ -7,7 +7,7 @@ app = Flask(__name__)
 api = Api(app)
 
 class OpenAPI(Resource):
-	def get(self):
+	def post(self):
 		return {'post_meal': bool(random.getrandbits(1)),
 		'blood_sugar_level': random.randint(0,400),
         'breaths_per_minute': random.randint(10,30),
@@ -27,6 +27,7 @@ class OpenAPI(Resource):
 api.add_resource(OpenAPI, "/")
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	# app.run(debug=True)
+	app.run(host="0.0.0.0", port=5000, debug=True)
 
 
