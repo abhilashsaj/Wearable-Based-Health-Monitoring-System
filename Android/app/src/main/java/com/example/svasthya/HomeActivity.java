@@ -193,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
                             healthParam.put(   "heart_rate",heart_rate);
                             healthParam.put(   "cholestorol",cholestorol);
                             healthParam.put(  "oxygen_saturation",oxygen_saturation);
+                            healthParam.put(  "entry_type","iot device");
                             healthParam.put("DEVICE_ID", getDeviceId(HomeActivity.this));
 
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
