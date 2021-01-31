@@ -2,6 +2,7 @@ package com.example.svasthya;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,7 +80,18 @@ public class HomeActivity extends AppCompatActivity {
         cholestorol_textview = (TextView)findViewById(R.id.cholestorol);
         oxygen_saturation_textview = (TextView)findViewById(R.id.oxygen_saturation);
 
-        
+        postRequest("your message here", url);
+
+        final Handler h = new Handler();
+        h.post(new Runnable() {
+            @Override
+            public void run() {
+
+                postRequest("your message here", url);
+
+                h.postDelayed(this, 30000);
+            }
+        });
 
         connect = findViewById(R.id.connect);
         connect.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                             cholestorol_textview.setText(cholestorol);
                             oxygen_saturation_textview.setText(oxygen_saturation);
 
-                            Toast.makeText(HomeActivity.this, obj.toString() + " "+ blood_sugar_level, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(HomeActivity.this, obj.toString() + " "+ blood_sugar_level, Toast.LENGTH_LONG).show();
                         } catch (IOException | JSONException e) {
                             e.printStackTrace();
                         }
@@ -179,5 +191,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void syncValues(View view) {
 
+    }
+
+    public void goToManual(View view) {
+        Intent intent = new Intent(HomeActivity.this, ManualEntryActivity.class);
+        startActivity(intent);
     }
 }

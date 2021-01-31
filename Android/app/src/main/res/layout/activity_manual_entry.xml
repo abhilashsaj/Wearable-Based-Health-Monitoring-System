@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
 
         android:text="Logout"
+        android:onClick="logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.984"
@@ -20,13 +21,13 @@
         app:layout_constraintVertical_bias="0.04" />
 
     <Button
-        android:id="@+id/connect"
+        android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Connect"
+        android:text="Upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.668"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
@@ -37,7 +38,7 @@
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connect">
+        app:layout_constraintTop_toBottomOf="@+id/upload">
         <!-- LinearLayout Inside ScrollView -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,7 +67,7 @@
                     android:text="Blood Sugar Level"
                     android:textColor="@color/blackColor" />
 
-                <TextView
+                <EditText
                     android:id="@+id/blood_sugar_level"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -435,8 +436,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@color/greenColor"
+                android:background="@color/colorPrimary"
                 android:text="Submit"
+                android:onClick="submitToServer"
                 android:textColor="@color/whiteColor" />
         </LinearLayout>
     </ScrollView>
