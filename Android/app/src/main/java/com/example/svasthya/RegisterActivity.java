@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -48,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.reg_password);
         regBtn = findViewById(R.id.reg_btn);
         mAuth = FirebaseAuth.getInstance();
-        IMEI = getDeviceIMEI();
+        IMEI = getDeviceId(this);
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 final Map<String, Object> user = new HashMap<>();
                 user.put("name", name);
-                user.put("IMEI", IMEI);
+                user.put("email", email);
+                user.put("DEVICE_ID", IMEI);
 
                 if( !name.isEmpty() && !password.isEmpty() && !email.isEmpty()){
 
@@ -69,21 +71,23 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
 //                                        Log.d(Tag, "createUserWithEmail:success");
-                                        db.collection("users")
-                                                .add(user)
-                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        FirebaseUser user = mAuth.getCurrentUser();
+
+                                        db.collection("users").document(user.getUid())
+                                                .set(user)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
-                                                    public void onSuccess(DocumentReference documentReference) {
-//                                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                    public void onSuccess(Void aVoid) {
+                                            Log.d("REgister Activity", "DocumentSnapshot successfully written!");
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-//                                                        Log.w(TAG, "Error adding document", e);
+                                            Log.w("REgister Activity", "Error writing document", e);
                                                     }
                                                 });
-                                        FirebaseUser user = mAuth.getCurrentUser();
+//                                        FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(RegisterActivity.this, "Account created successfully.",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
@@ -110,16 +114,26 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public String getDeviceIMEI() {
-        String deviceUniqueIdentifier = null;
-        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        if (null != tm) {
-            deviceUniqueIdentifier = tm.getDeviceId();
+    public static String getDeviceId(Context context) {
+
+        String deviceId;
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            deviceId = Settings.Secure.getString(
+                    context.getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+        } else {
+            final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (mTelephony.getDeviceId() != null) {
+                deviceId = mTelephony.getDeviceId();
+            } else {
+                deviceId = Settings.Secure.getString(
+                        context.getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
+            }
         }
-        if (null == deviceUniqueIdentifier || 0 == deviceUniqueIdentifier.length()) {
-            deviceUniqueIdentifier = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        }
-        return deviceUniqueIdentifier;
+
+        return deviceId;
     }
 
     public void signIn(View view) {
