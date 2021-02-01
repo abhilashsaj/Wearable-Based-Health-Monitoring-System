@@ -3,6 +3,33 @@ from flask_restful import Api, Resource
 import pandas as pd
 import random 
 
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import numpy as np
+# import pandas as pd
+
+from sklearn.multiclass import OneVsRestClassifier
+import pickle
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+from sklearn.naive_bayes import GaussianNB
+from sklearn import model_selection
+# from sklearn.ensemble import BaggingClassifier
+# from sklearn.ensemble import ExtraTreesClassifier
+# from sklearn.ensemble import AdaBoostClassifier
+# from sklearn.ensemble import GradientBoostingClassifier
+# from sklearn.ensemble import VotingClassifier
+# from sklearn.metrics import roc_curve, roc_auc_score
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -24,7 +51,38 @@ class OpenAPI(Resource):
         }
         
 
+class PredictionModels(Resource):
+	def get(self):		
+		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
+		# loaded_model.predict([100,True])
+		diabetes = "No"
+		if(loaded_model.predict([[100,True]]) == 0):
+			diabetes="No"
+		elif(loaded_model.predict([[100,True]]) == 0):
+			diabetes="PreDiabetes"
+		else:
+			diabetes="Yes"
+
+		loaded_model = pickle.load(open("bronchi.sav", 'rb'))
+
+		bronchi = "No"
+		if(loaded_model.predict([[22,20,8,8]]) == 0):
+			bronchi="No"
+		else:
+			bronchi="Yes"
+
+		loaded_model = pickle.load(open("hypoxemia.sav", 'rb'))
+		hypoxemia = "No"
+		if(loaded_model.predict([[22]]) == 0):
+			hypoxemia="No"
+		else:
+			hypoxemia="Yes"
+
+		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia}
+
+
 api.add_resource(OpenAPI, "/")
+api.add_resource(PredictionModels, "/prediction_models")
 
 if __name__ == "__main__":
 	# app.run(debug=True)
