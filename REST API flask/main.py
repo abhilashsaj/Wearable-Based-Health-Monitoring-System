@@ -78,7 +78,21 @@ class PredictionModels(Resource):
 		else:
 			hypoxemia="Yes"
 
-		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia}
+		loaded_model = pickle.load(open("asthma.sav", 'rb'))
+		asthma = "No"
+		if(loaded_model.predict([[92, 90,30] ]) == 0):
+			asthma="No"
+		else:
+			asthma="Yes"
+
+		loaded_model = pickle.load(open("CHD.sav", 'rb'))
+		chd = "No"
+		if(loaded_model.predict([[120,90, 90,200] ]) == 0):
+			chd="No"
+		else:
+			chd="Yes"
+
+		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 
 api.add_resource(OpenAPI, "/")
