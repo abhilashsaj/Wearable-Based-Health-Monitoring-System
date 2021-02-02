@@ -81,6 +81,12 @@ public class HomeActivity extends AppCompatActivity {
     private TextView oxygen_saturation_textview;
     private FirebaseAuth mAuth;
 
+    private String diabetes;
+    private String bronchi;
+    private String hypoxemia;
+    private String asthma;
+    private String chd ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,12 +153,8 @@ public class HomeActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
                         Toast.makeText(HomeActivity.this, "Something went wrong:" + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         call.cancel();
-
-
                     }
                 });
 
@@ -229,8 +231,50 @@ public class HomeActivity extends AppCompatActivity {
                             heart_rate_textview.setText(heart_rate);
                             cholestorol_textview.setText(cholestorol);
                             oxygen_saturation_textview.setText(oxygen_saturation);
+//                            Toast.makeText(HomeActivity.this, "Calling Server...", Toast.LENGTH_SHORT).show();
+
+                            RequestBody requestBody = buildRequestBody("your message here");
+                            OkHttpClient okHttpClient = new OkHttpClient();
+                            Request request = new Request
+                                    .Builder()
+                                    .post(requestBody)
+                                    .url("http://" + "192.168.1.36" + ":" + 5000 + "/prediction_models")
+                                    .build();
+                            okHttpClient.newCall(request).enqueue(new Callback() {
+                                @Override
+                                public void onFailure(final Call call, final IOException e) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(HomeActivity.this, "Something went wrong:" + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            call.cancel();
+                                        }
+                                    });
+
+                                }
+
+                                @Override
+                                public void onResponse(Call call, final Response response) throws IOException {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                JSONObject obj = new JSONObject(response.body().string());
+                                                diabetes = obj.getString("diabetes");
+                                                bronchi = obj.getString("bronchi");
+                                                hypoxemia =  obj.getString("hypoxemia");
+                                                asthma =  obj.getString("asthma");
+                                                chd =  obj.getString("chd");
+                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+                                            } catch (IOException | JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
 
 
+                                }
+                            });
 
 //                            Toast.makeText(HomeActivity.this, obj.toString() + " "+ blood_sugar_level, Toast.LENGTH_LONG).show();
                         } catch (IOException | JSONException e) {

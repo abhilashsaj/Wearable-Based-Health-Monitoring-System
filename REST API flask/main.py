@@ -52,7 +52,7 @@ class OpenAPI(Resource):
         
 
 class PredictionModels(Resource):
-	def get(self):		
+	def post(self):		
 		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
 		# loaded_model.predict([100,True])
 		diabetes = "No"
