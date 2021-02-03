@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+
                 android:weightSum="2">
 
                 <!-- place one TextView and one TextView inside layout using weight property -->
@@ -147,7 +148,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/Asthma"
+                    android:id="@+id/asthma"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:paddingLeft="10dp"

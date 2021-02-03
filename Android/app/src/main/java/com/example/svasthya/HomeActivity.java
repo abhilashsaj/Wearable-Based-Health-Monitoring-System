@@ -81,6 +81,14 @@ public class HomeActivity extends AppCompatActivity {
     private TextView oxygen_saturation_textview;
     private FirebaseAuth mAuth;
 
+
+    private TextView diabetes_textview;
+    private TextView bronchi_textview;
+    private TextView hypoxemia_textview;
+    private TextView asthma_textview;
+    private TextView chd_textview;
+    private TextView stress_textview;
+
     private String diabetes;
     private String bronchi;
     private String hypoxemia;
@@ -107,6 +115,14 @@ public class HomeActivity extends AppCompatActivity {
         heart_rate_textview = (TextView)findViewById(R.id.heart_rate);
         cholestorol_textview = (TextView)findViewById(R.id.cholestorol);
         oxygen_saturation_textview = (TextView)findViewById(R.id.oxygen_saturation);
+
+        diabetes_textview = (TextView)findViewById(R.id.diabetes);
+        bronchi_textview = (TextView)findViewById(R.id.bronchi);
+        chd_textview = (TextView)findViewById(R.id.chd);
+        hypoxemia_textview = (TextView)findViewById(R.id.hypoxemia);
+        asthma_textview = (TextView)findViewById(R.id.asthma);
+        stress_textview = (TextView)findViewById(R.id.stress);
+
 
         postRequest("your message here", url);
 
@@ -265,6 +281,13 @@ public class HomeActivity extends AppCompatActivity {
                                                 hypoxemia =  obj.getString("hypoxemia");
                                                 asthma =  obj.getString("asthma");
                                                 chd =  obj.getString("chd");
+
+                                                diabetes_textview.setText(diabetes);
+                                                bronchi_textview.setText(bronchi);
+                                                hypoxemia_textview.setText(hypoxemia);
+                                                asthma_textview.setText(asthma);
+                                                chd_textview.setText(chd);
+
                                                 Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
