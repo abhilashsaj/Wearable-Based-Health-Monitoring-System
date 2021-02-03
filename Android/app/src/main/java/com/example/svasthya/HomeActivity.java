@@ -288,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
                                                 asthma_textview.setText(asthma);
                                                 chd_textview.setText(chd);
 
-                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+//                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
                                             }
