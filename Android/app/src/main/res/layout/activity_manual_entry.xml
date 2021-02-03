@@ -24,7 +24,8 @@
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
+        android:text="Upload Document"
+        android:onClick="uploadDoc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.668"
@@ -46,6 +47,80 @@
             android:orientation="vertical">
 
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+            <LinearLayout
+                android:id="@+id/zerothLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <EditText
+                    android:id="@+id/editTextFileName"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:hint="Enter name for file"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonUploadFile"
+
+                    android:layout_below="@id/editTextFileName"
+                    android:text="Upload"
+                    android:onClick="uploadFile"
+
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1.4"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:weightSum="2">
+
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textViewStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No file selected"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <TextView
+                    android:id="@+id/textViewUploads"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="viewUploads"
+                    android:padding="10dp"
+                    android:text="View Uploads"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/firstLayout"
