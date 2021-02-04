@@ -39,7 +39,8 @@ public class ViewUploadsActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //list to store uploads data
-    List<Upload> uploadList;
+    ArrayList<Upload> uploadList;
+    private static CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class ViewUploadsActivity extends AppCompatActivity {
 
         uploadList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
+
+
 
 
         //adding a clicklistener on listview
@@ -84,7 +87,13 @@ public class ViewUploadsActivity extends AppCompatActivity {
                                 }
 
                                 //displaying it to list
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
+                                adapter= new CustomAdapter(uploadList,getApplicationContext());
+
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
+//                                listView.setAdapter(adapter);
+
+
+
                                 listView.setAdapter(adapter);
                             }
                         } else {

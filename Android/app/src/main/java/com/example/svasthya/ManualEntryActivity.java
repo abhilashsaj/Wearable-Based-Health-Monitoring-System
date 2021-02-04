@@ -169,7 +169,6 @@ public class ManualEntryActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         StorageReference sRef = mStorageReference.child("med_records/" + user.getUid()+"/"+ System.currentTimeMillis() + ".pdf");
         sRef.putFile(data)
-
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
                     @Override
@@ -184,7 +183,7 @@ public class ManualEntryActivity extends AppCompatActivity {
 
                         Map<String, Object> file = new HashMap<>();
                         file.put("name", upload.getName());
-                        file.put("url", upload.getUrl());
+                        file.put("url", taskSnapshot.);
 
                         db.collection("users").document(user.getUid()).collection("health_records").document(format)
                                 .set(file)
