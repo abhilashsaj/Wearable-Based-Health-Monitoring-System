@@ -24,11 +24,11 @@
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Document"
-        android:onClick="uploadDoc"
+        android:onClick="viewEntries"
+        android:text="View Entries"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
@@ -206,7 +206,7 @@
                     android:text="Post Meal"
                     android:textColor="@color/blackColor" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/post_meal"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -214,7 +214,11 @@
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="@color/blackColor"
+
+                    android:spinnerMode="dropdown"/>
+
+
             </LinearLayout>
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
 
@@ -238,7 +242,7 @@
                     android:text="Running"
                     android:textColor="@color/blackColor" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/is_running"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -246,7 +250,9 @@
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="@color/blackColor"
+                    android:spinnerMode="dropdown"/>
+
             </LinearLayout>
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
 

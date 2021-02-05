@@ -79,7 +79,7 @@ public class ViewUploadsActivity extends AppCompatActivity {
                                 Upload upload = new Upload(document.getString("name"),document.getString("url"));
                                 uploadList.add(upload);
                                 Log.d("Success", document.getId() + " => " + document.getData());
-                                Toast.makeText(getApplicationContext(), "Success " + document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(), "Success " + document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                                 String[] uploads = new String[uploadList.size()];
 
                                 for (int i = 0; i < uploads.length; i++) {

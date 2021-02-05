@@ -35,8 +35,7 @@
             android:layout_weight="1.6"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:autoLink="web"
-            android:linksClickable="true"
+
             android:textColor="@color/blackColor" />
     </LinearLayout>
 

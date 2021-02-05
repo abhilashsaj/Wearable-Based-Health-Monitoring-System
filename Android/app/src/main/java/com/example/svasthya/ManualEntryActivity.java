@@ -19,8 +19,11 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +46,7 @@ import java.util.Map;
 
 import in.gauriinfotech.commons.Commons;
 
-public class ManualEntryActivity extends AppCompatActivity {
+public class ManualEntryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     //this is the pic pdf code used in file chooser
     final static int PICK_PDF_CODE = 2342;
@@ -59,10 +62,10 @@ public class ManualEntryActivity extends AppCompatActivity {
 
 
     private static final int SELECT_PDF = 0;
-    private EditText post_meal_textview;
+    private Spinner post_meal_textview;
     private EditText blood_sugar_level_textview;
     private EditText breaths_per_minute_textview;
-    private EditText is_running_textview;
+    private Spinner is_running_textview;
     private EditText breath_shortness_severity_textview;
     private EditText cough_frequency_textview;
     private EditText cough_severity_textview;
@@ -107,10 +110,18 @@ public class ManualEntryActivity extends AppCompatActivity {
 
 
 
-        post_meal_textview = (EditText) findViewById(R.id.post_meal);
+        post_meal_textview = (Spinner) findViewById(R.id.post_meal);
+        String[] items = new String[]{"true", "false"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        post_meal_textview.setAdapter(adapter);
+        post_meal_textview.setOnItemSelectedListener(this);
+
         blood_sugar_level_textview = (EditText) findViewById(R.id.blood_sugar_level);
         breaths_per_minute_textview = (EditText) findViewById(R.id.breaths_per_minute);
-        is_running_textview = (EditText) findViewById(R.id.is_running);
+        is_running_textview = (Spinner) findViewById(R.id.is_running);
+        is_running_textview.setAdapter(adapter);
+        is_running_textview.setOnItemSelectedListener(this);
+
         breath_shortness_severity_textview = (EditText) findViewById(R.id.breath_shortness_severity);
         cough_frequency_textview = (EditText) findViewById(R.id.cough_frequency);
         cough_severity_textview = (EditText) findViewById(R.id.cough_severity);
@@ -159,65 +170,117 @@ public class ManualEntryActivity extends AppCompatActivity {
 
 
     //this method is uploading the file
-    //the code is same as the previous tutorial
-    //so we are not explaining it
     private void uploadFile(Uri data) {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
         final String format = simpleDateFormat.format(new Date());
 
         progressBar.setVisibility(View.VISIBLE);
-        StorageReference sRef = mStorageReference.child("med_records/" + user.getUid()+"/"+ System.currentTimeMillis() + ".pdf");
-        sRef.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @SuppressWarnings("VisibleForTests")
+        final StorageReference sRef = mStorageReference.child("med_records/" + user.getUid()+"/"+ System.currentTimeMillis() + ".pdf");
+        sRef.putFile(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    public void onSuccess(Uri uri) {
+                        Uri downloadUrl = uri;
+                        //Do what you want with the url
                         progressBar.setVisibility(View.GONE);
                         textViewStatus.setText("File Uploaded Successfully");
                         Toast.makeText(getApplicationContext(), "Successfully uploaded file to storage", Toast.LENGTH_LONG).show();
 
-                        Upload upload = new Upload(editTextFilename.getText().toString(), taskSnapshot.getStorage().getDownloadUrl().toString());
+                        Upload upload = new Upload(editTextFilename.getText().toString(), downloadUrl.toString());
 
 
                         Map<String, Object> file = new HashMap<>();
                         file.put("name", upload.getName());
-                        file.put("url", taskSnapshot.);
+                        file.put("url", upload.getUrl());
 
                         db.collection("users").document(user.getUid()).collection("health_records").document(format)
                                 .set(file)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                            Log.d("Success", "DocumentSnapshot successfully written!");
-                                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                                        Log.d("Success", "DocumentSnapshot successfully written!");
+//                                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                            Log.w("Fail", "Error writing document", e);
+                                        Log.w("Fail", "Error writing document", e);
                                     }
                                 });
-//                        mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
+//                    Toast.makeText(ManualEntryActivity.this, "Upload Done", Toast.LENGTH_LONG).show();
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @SuppressWarnings("VisibleForTests")
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        textViewStatus.setText((int) progress + "% Uploading...");
-                    }
-                });
 
+                });
+//
+//        sRef.putFile(data)
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @SuppressWarnings("VisibleForTests")
+//                    @Override
+//
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        progressBar.setVisibility(View.GONE);
+//                        textViewStatus.setText("File Uploaded Successfully");
+//                        Toast.makeText(getApplicationContext(), "Successfully uploaded file to storage", Toast.LENGTH_LONG).show();
+//
+//                        Upload upload = new Upload(editTextFilename.getText().toString(), taskSnapshot.getStorage().getDownloadUrl().toString());
+//
+//
+//                        Map<String, Object> file = new HashMap<>();
+//                        file.put("name", upload.getName());
+//                        file.put("url", taskSnapshot.);
+//
+//                        db.collection("users").document(user.getUid()).collection("health_records").document(format)
+//                                .set(file)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                            Log.d("Success", "DocumentSnapshot successfully written!");
+//                                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                            Log.w("Fail", "Error writing document", e);
+//                                    }
+//                                });
+////                        mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception exception) {
+//                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+//                    }
+//                })
+//                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                    @SuppressWarnings("VisibleForTests")
+//                    @Override
+//                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                        textViewStatus.setText((int) progress + "% Uploading...");
+//                    }
+//                });
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @SuppressWarnings("VisibleForTests")
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                textViewStatus.setText((int) progress + "% Uploading...");
+            }
+        });
     }
 
     public void onClick(View view) {
@@ -238,10 +301,10 @@ public class ManualEntryActivity extends AppCompatActivity {
 
     public void submitToServer(View view) {
 
-        post_meal = post_meal_textview.getText().toString();
+//        post_meal = post_meal_textview.getText().toString();
         blood_sugar_level = blood_sugar_level_textview.getText().toString();
         breaths_per_minute = breaths_per_minute_textview.getText().toString();
-        is_running = is_running_textview.getText().toString();
+//        is_running = is_running_textview.getText().toString();
         breath_shortness_severity = breath_shortness_severity_textview.getText().toString();
         cough_frequency = cough_frequency_textview.getText().toString();
         cough_severity = cough_severity_textview.getText().toString();
@@ -251,44 +314,81 @@ public class ManualEntryActivity extends AppCompatActivity {
         cholestorol = cholestorol_textview.getText().toString();
         oxygen_saturation = oxygen_saturation_textview.getText().toString();
 
-        Map<String, Object> healthParam = new HashMap<>();
+        if(!post_meal.trim().isEmpty() && !blood_sugar_level.trim().isEmpty() &&
+        !breaths_per_minute.trim().isEmpty() &&
+                !is_running.trim().isEmpty() &&
+        !breath_shortness_severity.trim().isEmpty() &&
+                !cough_frequency.trim().isEmpty() &&
+        !cough_severity.trim().isEmpty() &&
+                !blood_pressure_sys.trim().isEmpty() &&
+        !blood_pressure_dia.trim().isEmpty() &&
+                !heart_rate.trim().isEmpty() &&
+        !cholestorol.trim().isEmpty() &&
+                !oxygen_saturation.trim().isEmpty())
+        {
+            Map<String, Object> healthParam = new HashMap<>();
 
-        healthParam.put( "post_meal",post_meal);
-        healthParam.put( "blood_sugar_level",blood_sugar_level);
-        healthParam.put(   "breaths_per_minute",breaths_per_minute);
-        healthParam.put("is_running",is_running);
-        healthParam.put( "breath_shortness_severity",breath_shortness_severity);
-        healthParam.put( "cough_frequency",cough_frequency);
-        healthParam.put(   "cough_severity",cough_severity);
-        healthParam.put( "blood_pressure_sys",blood_pressure_sys);
-        healthParam.put( "blood_pressure_dia",blood_pressure_dia);
-        healthParam.put(   "heart_rate",heart_rate);
-        healthParam.put(   "cholestorol",cholestorol);
-        healthParam.put(  "oxygen_saturation",oxygen_saturation);
-        healthParam.put(  "entry_type","manual");
-        healthParam.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
+            healthParam.put( "post_meal",post_meal);
+            healthParam.put( "blood_sugar_level",blood_sugar_level);
+            healthParam.put(   "breaths_per_minute",breaths_per_minute);
+            healthParam.put("is_running",is_running);
+            healthParam.put( "breath_shortness_severity",breath_shortness_severity);
+            healthParam.put( "cough_frequency",cough_frequency);
+            healthParam.put(   "cough_severity",cough_severity);
+            healthParam.put( "blood_pressure_sys",blood_pressure_sys);
+            healthParam.put( "blood_pressure_dia",blood_pressure_dia);
+            healthParam.put(   "heart_rate",heart_rate);
+            healthParam.put(   "cholestorol",cholestorol);
+            healthParam.put(  "oxygen_saturation",oxygen_saturation);
+            healthParam.put(  "entry_type","manual");
+            healthParam.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-        String format = simpleDateFormat.format(new Date());
-        Log.d("HomeActivity", "Current Timestamp: " + format);
-        healthParam.put("TIMESTAMP", format);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+            String format = simpleDateFormat.format(new Date());
+            Log.d("HomeActivity", "Current Timestamp: " + format);
+            healthParam.put("TIMESTAMP", format);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("users").document(user.getUid()).collection("health_data").document(format)
-                .set(healthParam)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            db.collection("users").document(user.getUid()).collection("health_data").document(format)
+                    .set(healthParam)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
 //                                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                        Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 //                                            Log.w(TAG, "Error writing document", e);
-                    }
-                });
+                        }
+                    });
+
+            db.collection("users").document(user.getUid()).collection("manual").document(format)
+                    .set(healthParam)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                            Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+//                                            Log.w(TAG, "Error writing document", e);
+                        }
+                    });
+
+        }
+        else {
+            Toast.makeText(ManualEntryActivity.this, "Please Enter all values", Toast.LENGTH_LONG).show();
+        }
+
+
+
+
 
     }
     public static String getDeviceId(Context context) {
@@ -320,5 +420,48 @@ public class ManualEntryActivity extends AppCompatActivity {
 
     public void viewUploads(View view) {
         startActivity(new Intent(this, ViewUploadsActivity.class));
+    }
+
+    public void viewEntries(View view) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent.getId() == R.id.post_meal)
+        {
+            switch (position) {
+                case 0:
+                    // Whatever you want to happen when the first item gets selected
+                    post_meal = "true";
+                    break;
+                case 1:
+                    // Whatever you want to happen when the second item gets selected
+                    post_meal = "false";
+                    break;
+
+            }
+        }
+        else if(parent.getId() == R.id.is_running)
+        {
+            switch (position) {
+                case 0:
+                    // Whatever you want to happen when the first item gets selected
+                    is_running = "true";
+                    break;
+                case 1:
+                    // Whatever you want to happen when the second item gets selected
+                    is_running = "false";
+                    break;
+
+            }
+        }
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -1,12 +1,15 @@
 package com.example.svasthya;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,12 +39,20 @@ public class CustomAdapter extends ArrayAdapter<Upload> implements View.OnClickL
         int position=(Integer) v.getTag();
         Object object= getItem(position);
         Upload dataModel=(Upload)object;
+        Toast.makeText(this.mContext, dataModel.getUrl(), Toast.LENGTH_LONG).show();
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dataModel.getUrl()));
+        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.mContext.startActivity(browserIntent);
+
+//        this.mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.stackoverflow.com")));
 
 //        switch (v.getId())
 //        {
 //            case R.id.url:
-//                Snackbar.make(v, "Release date " +Upload.getFeature(), Snackbar.LENGTH_LONG)
-//                        .setAction("No action", null).show();
+////                Snackbar.make(v, "Release date " +Upload.getFeature(), Snackbar.LENGTH_LONG)
+////                        .setAction("No action", null).show();
+//                this.mContext.startActivity(browserIntent);
 //                break;
 //        }
     }
@@ -64,6 +75,8 @@ public class CustomAdapter extends ArrayAdapter<Upload> implements View.OnClickL
             convertView = inflater.inflate(R.layout.row_item, parent, false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.url = (TextView) convertView.findViewById(R.id.url);
+//            viewHolder.url.setOnClickListener(this);
+//            viewHolder.url.setTag(position);
 
 
             result=convertView;
@@ -80,6 +93,8 @@ public class CustomAdapter extends ArrayAdapter<Upload> implements View.OnClickL
 
         viewHolder.name.setText(dataModel.getName());
         viewHolder.url.setText(dataModel.getUrl());
+        viewHolder.url.setOnClickListener(this);
+        viewHolder.url.setTag(position);
 
         // Return the completed view to render on screen
         return convertView;
