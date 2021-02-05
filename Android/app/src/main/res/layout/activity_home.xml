@@ -670,14 +670,7 @@
                     android:textColor="@color/blackColor" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@color/colorPrimary"
-                android:text="Submit"
-                android:textColor="@color/whiteColor" />
+
         </LinearLayout>
     </ScrollView>
 

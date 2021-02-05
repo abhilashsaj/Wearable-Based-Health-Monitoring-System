@@ -4,34 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bluewhite"
     tools:context=".ManualEntryActivity">
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
 
-        android:text="Logout"
+        android:background="@color/whiteColor"
         android:onClick="logout"
+        android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintHorizontal_bias="0.922"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
     <Button
         android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="@color/whiteColor"
         android:onClick="viewEntries"
         android:text="View Entries"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
+
+    <Button
+        android:id="@+id/textViewUploads"
+        android:layout_width="104dp"
+        android:layout_height="35dp"
+        android:background="@color/whiteColor"
+        android:onClick="viewUploads"
+        android:text="View Uploads"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
 
     <ScrollView
         android:layout_width="363dp"
@@ -61,14 +78,14 @@
                 <EditText
                     android:id="@+id/editTextFileName"
                     android:layout_width="200dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:hint="Enter name for file"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.6"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                     /> 
 
                 <Button
                     android:id="@+id/buttonUploadFile"
@@ -76,9 +93,10 @@
                     android:layout_below="@id/editTextFileName"
                     android:text="Upload"
                     android:onClick="uploadFile"
+                    android:background="@color/whiteColor"
 
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
@@ -106,20 +124,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="No file selected"
+                    android:textSize="16sp"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
-                    android:id="@+id/textViewUploads"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="viewUploads"
-                    android:padding="10dp"
-                    android:text="View Uploads"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    />
+
 
             </LinearLayout>
 
