@@ -207,37 +207,37 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/diabetes"
+                    android:id="@+id/diabetes_m"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingLeft="10dp"
-                    android:text="No"
+                    android:text="-"
                     android:background="@drawable/textlines"
                     android:textColor="@color/blackColor" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/hypoxemia"
+                    android:id="@+id/hypoxemia_m"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/textlines"
                     android:paddingLeft="10dp"
-                    android:text="No"
+                    android:text="-"
                     android:textColor="@color/blackColor" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/asthma"
+                    android:id="@+id/asthma_m"
                     android:background="@drawable/textlines"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     android:gravity="center"
-                    android:text="No"
+                    android:text="-"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
 
@@ -299,34 +299,34 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/chd"
+                    android:id="@+id/chd_m"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingLeft="10dp"
-                    android:text="No"
+                    android:text="-"
                     android:textColor="@color/blackColor" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/bronchi"
+                    android:id="@+id/bronchi_m"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingLeft="10dp"
-                    android:text="No"
+                    android:text="-"
                     android:textColor="@color/blackColor" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:id="@+id/stress"
+                    android:id="@+id/stress_m"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     android:gravity="center"
-                    android:text="No"
+                    android:text="-"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
 
@@ -358,6 +358,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
@@ -390,6 +391,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
@@ -492,6 +494,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1.4"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
@@ -523,6 +526,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1.4"
+                    android:inputType="number"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />
@@ -546,6 +550,7 @@
                     android:layout_weight="0.6"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     android:text="Cough Severity"
                     android:textColor="@color/blackColor" />
 

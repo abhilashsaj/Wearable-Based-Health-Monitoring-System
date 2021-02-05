@@ -162,6 +162,12 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         cholestorol_textview = (EditText) findViewById(R.id.cholestorol);
         oxygen_saturation_textview = (EditText) findViewById(R.id.oxygen_saturation);
 
+        diabetes_textview = (TextView)findViewById(R.id.diabetes_m);
+        bronchi_textview = (TextView)findViewById(R.id.bronchi_m);
+        chd_textview = (TextView)findViewById(R.id.chd_m);
+        hypoxemia_textview = (TextView)findViewById(R.id.hypoxemia_m);
+        asthma_textview = (TextView)findViewById(R.id.asthma_m);
+        stress_textview = (TextView)findViewById(R.id.stress_m);
 
     }
     private void getPDF() {
@@ -332,6 +338,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
 
     public void submitToServer(View view) {
 
+
 //        post_meal = post_meal_textview.getText().toString();
         blood_sugar_level = blood_sugar_level_textview.getText().toString();
         breaths_per_minute = breaths_per_minute_textview.getText().toString();
@@ -345,9 +352,10 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         cholestorol = cholestorol_textview.getText().toString();
         oxygen_saturation = oxygen_saturation_textview.getText().toString();
 
-        if(!post_meal.trim().isEmpty() && !blood_sugar_level.trim().isEmpty() &&
+
+
+        if(!blood_sugar_level.trim().isEmpty() &&
         !breaths_per_minute.trim().isEmpty() &&
-                !is_running.trim().isEmpty() &&
         !breath_shortness_severity.trim().isEmpty() &&
                 !cough_frequency.trim().isEmpty() &&
         !cough_severity.trim().isEmpty() &&
@@ -357,6 +365,8 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         !cholestorol.trim().isEmpty() &&
                 !oxygen_saturation.trim().isEmpty())
         {
+
+
             Map<String, Object> healthParam = new HashMap<>();
 
             healthParam.put( "post_meal",post_meal);
@@ -412,6 +422,8 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                         }
                     });
 
+            Toast.makeText(ManualEntryActivity.this, "Sumit function invoked Successfully", Toast.LENGTH_LONG).show();
+            Log.d("function", "submit invoke");
 
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -428,6 +440,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                     .addFormDataPart("cholestorol", cholestorol)
                     .addFormDataPart("oxygen_saturation", oxygen_saturation)
                     .build();
+
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request
                     .Builder()
@@ -466,7 +479,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                 asthma_textview.setText(asthma);
                                 chd_textview.setText(chd);
 
-                                                Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                             } catch (IOException | JSONException e) {
                                 e.printStackTrace();
                             }
