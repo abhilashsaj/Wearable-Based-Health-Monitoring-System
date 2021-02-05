@@ -198,46 +198,6 @@ public class HomeActivity extends AppCompatActivity {
                             cholestorol =  obj.getString("cholestorol");
                             oxygen_saturation =  obj.getString("oxygen_saturation");
 
-                            Map<String, Object> healthParam = new HashMap<>();
-
-                            healthParam.put( "post_meal",post_meal);
-                            healthParam.put( "blood_sugar_level",blood_sugar_level);
-                            healthParam.put(   "breaths_per_minute",breaths_per_minute);
-                            healthParam.put("is_running",is_running);
-                            healthParam.put( "breath_shortness_severity",breath_shortness_severity);
-                            healthParam.put( "cough_frequency",cough_frequency);
-                            healthParam.put(   "cough_severity",cough_severity);
-                            healthParam.put( "blood_pressure_sys",blood_pressure_sys);
-                            healthParam.put( "blood_pressure_dia",blood_pressure_dia);
-                            healthParam.put(   "heart_rate",heart_rate);
-                            healthParam.put(   "cholestorol",cholestorol);
-                            healthParam.put(  "oxygen_saturation",oxygen_saturation);
-                            healthParam.put(  "entry_type","iot device");
-                            healthParam.put("DEVICE_ID", getDeviceId(HomeActivity.this));
-
-
-
-
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-                            String format = simpleDateFormat.format(new Date());
-                            Log.d("HomeActivity", "Current Timestamp: " + format);
-                            healthParam.put("TIMESTAMP", format);
-
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            db.collection("users").document(user.getUid()).collection("health_data").document(format)
-                                    .set(healthParam)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-//                                            Log.w(TAG, "Error writing document", e);
-                                        }
-                                    });
 
                             post_meal_textview.setText(post_meal);
                             blood_sugar_level_textview.setText(blood_sugar_level);
@@ -316,6 +276,56 @@ public class HomeActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
+                                    Map<String, Object> healthParam = new HashMap<>();
+
+                                    healthParam.put( "post_meal",post_meal);
+                                    healthParam.put( "blood_sugar_level",blood_sugar_level);
+                                    healthParam.put(   "breaths_per_minute",breaths_per_minute);
+                                    healthParam.put("is_running",is_running);
+                                    healthParam.put( "breath_shortness_severity",breath_shortness_severity);
+                                    healthParam.put( "cough_frequency",cough_frequency);
+                                    healthParam.put(   "cough_severity",cough_severity);
+                                    healthParam.put( "blood_pressure_sys",blood_pressure_sys);
+                                    healthParam.put( "blood_pressure_dia",blood_pressure_dia);
+                                    healthParam.put(   "heart_rate",heart_rate);
+                                    healthParam.put(   "cholestorol",cholestorol);
+                                    healthParam.put(  "oxygen_saturation",oxygen_saturation);
+                                    healthParam.put(  "entry_type","iot device");
+                                    healthParam.put("DEVICE_ID", getDeviceId(HomeActivity.this));
+
+                                    healthParam.put(  "diabetes",diabetes);
+                                    healthParam.put(  "chd",chd);
+                                    healthParam.put(  "asthma",asthma);
+                                    healthParam.put(  "hypoxemia",hypoxemia);
+                                    healthParam.put(  "bronchi",bronchi);
+                                    healthParam.put(  "stress","No");
+
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+                                    String format = simpleDateFormat.format(new Date());
+                                    String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+                                    String currentTime = new SimpleDateFormat("hh-mm-ss").format(new Date());
+                                    healthParam.put(  "currentDate",currentDate);
+                                    healthParam.put(  "currentTime",currentTime);
+                                    Log.d("HomeActivity", "Current Timestamp: " + format);
+                                    healthParam.put("TIMESTAMP", format);
+
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    db.collection("users").document(user.getUid())
+                                            .collection("health_data").document(currentDate)
+                                            .collection("time_slot").document(currentTime)
+                                            .set(healthParam)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+//                                            Log.w(TAG, "Error writing document", e);
+                                                }
+                                            });
 
 
                                 }
