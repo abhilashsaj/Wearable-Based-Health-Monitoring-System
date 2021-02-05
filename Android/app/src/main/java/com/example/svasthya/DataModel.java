@@ -58,6 +58,27 @@ public class DataModel {
     private String chd ;
     private String time;
 
+    public String getStress() {
+        return stress;
+    }
+
+    public void setStress(String stress) {
+        this.stress = stress;
+    }
+
+    public DataModel(String diabetes, String bronchi, String hypoxemia, String asthma, String chd, String time, String stress, String date) {
+        this.diabetes = diabetes;
+        this.bronchi = bronchi;
+        this.hypoxemia = hypoxemia;
+        this.asthma = asthma;
+        this.chd = chd;
+        this.time = time;
+        this.stress = stress;
+        this.date = date;
+    }
+
+    private String stress;
+
     public String getTime() {
         return time;
     }

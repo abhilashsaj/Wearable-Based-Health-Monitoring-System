@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +43,8 @@ public class ViewEntriesActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listView);
 
         dataModels= new ArrayList<>();
-        listView = (ListView) findViewById(R.id.listView);
+
+        Toast.makeText(getApplicationContext(), "Hi " , Toast.LENGTH_LONG).show();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,28 +68,33 @@ public class ViewEntriesActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                DataModel datamodel = new DataModel(document.getString("TIMESTAMP"),document.getString("url"));
-                                uploadList.add(datamodel);
+//                                Toast.makeText(getApplicationContext(), "Success " + document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
+                                DataModel datamodel = new DataModel(document.getString("currentTime"),
+                                        document.getString("currentDate"),
+                                        document.getString("diabetes"),
+                                        document.getString("asthma"),
+                                        document.getString("chd"),
+                                        document.getString("bronchi"),
+                                        document.getString("stress"),
+                                        document.getString("hypoxemia")
+                                        );
+                                dataModels.add(datamodel);
                                 Log.d("Success", document.getId() + " => " + document.getData());
 //                                Toast.makeText(getApplicationContext(), "Success " + document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                                 String[] data_models = new String[dataModels.size()];
 
-                                for (int i = 0; i < uploads.length; i++) {
-                                    data_models[i] = dataModels.get(i).getName();
+                                for (int i = 0; i < data_models.length; i++) {
+                                    data_models[i] = dataModels.get(i).getDate();
                                 }
 
                                 //displaying it to list
-                                adapter= new CustomAdapter(dataModels,getApplicationContext());
-
-//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
-//                                listView.setAdapter(adapter);
-
-
+                                adapter= new CustomAdapter2(dataModels,getApplicationContext());
 
                                 listView.setAdapter(adapter);
                             }
                         } else {
                             Log.w("Fail", "Error getting documents.", task.getException());
+                            Toast.makeText(getApplicationContext(), "FAil " , Toast.LENGTH_LONG).show();
                         }
                     }
                 });

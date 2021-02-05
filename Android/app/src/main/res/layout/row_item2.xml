@@ -22,7 +22,7 @@
         <!-- place one TextView and one TextView inside layout using weight property -->
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/date_yo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -32,7 +32,7 @@
             android:textSize="18sp"
             android:textColor="@color/blackColor" />
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/time_yo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"

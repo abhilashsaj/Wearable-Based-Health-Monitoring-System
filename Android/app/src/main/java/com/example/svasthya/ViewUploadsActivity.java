@@ -86,14 +86,7 @@ public class ViewUploadsActivity extends AppCompatActivity {
                                     uploads[i] = uploadList.get(i).getName();
                                 }
 
-                                //displaying it to list
                                 adapter= new CustomAdapter(uploadList,getApplicationContext());
-
-//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
-//                                listView.setAdapter(adapter);
-
-
-
                                 listView.setAdapter(adapter);
                             }
                         } else {

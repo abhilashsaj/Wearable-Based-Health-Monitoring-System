@@ -420,6 +420,76 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                 asthma_textview.setText(asthma);
                                 chd_textview.setText(chd);
 
+
+                                Map<String, Object> healthParam = new HashMap<>();
+
+                                healthParam.put( "post_meal",post_meal);
+                                healthParam.put( "blood_sugar_level",blood_sugar_level);
+                                healthParam.put(   "breaths_per_minute",breaths_per_minute);
+                                healthParam.put("is_running",is_running);
+                                healthParam.put( "breath_shortness_severity",breath_shortness_severity);
+                                healthParam.put( "cough_frequency",cough_frequency);
+                                healthParam.put(   "cough_severity",cough_severity);
+                                healthParam.put( "blood_pressure_sys",blood_pressure_sys);
+                                healthParam.put( "blood_pressure_dia",blood_pressure_dia);
+                                healthParam.put(   "heart_rate",heart_rate);
+                                healthParam.put(   "cholestorol",cholestorol);
+                                healthParam.put(  "oxygen_saturation",oxygen_saturation);
+                                healthParam.put(  "entry_type","manual");
+
+                                healthParam.put(  "diabetes",diabetes);
+                                healthParam.put(  "chd",chd);
+                                healthParam.put(  "asthma",asthma);
+                                healthParam.put(  "hypoxemia",hypoxemia);
+                                healthParam.put(  "bronchi",bronchi);
+                                healthParam.put(  "stress","No");
+                                healthParam.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
+
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+                                String format = simpleDateFormat.format(new Date());
+                                String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+                                String currentTime = new SimpleDateFormat("hh-mm-ss").format(new Date());
+                                healthParam.put(  "currentDate",currentDate);
+                                healthParam.put(  "currentTime",currentTime);
+                                Log.d("HomeActivity", "Current Timestamp: " + format);
+                                healthParam.put("TIMESTAMP", format);
+
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                db.collection("users").document(user.getUid())
+                                        .collection("health_data").document(currentDate)
+                                        .collection("time_slot").document(currentTime)
+                                        .set(healthParam)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+//                                            Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
+
+                                db.collection("users").document(user.getUid())
+                                        .collection("manual").document(format)
+                                        .set(healthParam)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+//                                            Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
+
                                 Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                             } catch (IOException | JSONException e) {
                                 e.printStackTrace();
@@ -431,75 +501,6 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                 }
             });
 
-            Map<String, Object> healthParam = new HashMap<>();
-
-            healthParam.put( "post_meal",post_meal);
-            healthParam.put( "blood_sugar_level",blood_sugar_level);
-            healthParam.put(   "breaths_per_minute",breaths_per_minute);
-            healthParam.put("is_running",is_running);
-            healthParam.put( "breath_shortness_severity",breath_shortness_severity);
-            healthParam.put( "cough_frequency",cough_frequency);
-            healthParam.put(   "cough_severity",cough_severity);
-            healthParam.put( "blood_pressure_sys",blood_pressure_sys);
-            healthParam.put( "blood_pressure_dia",blood_pressure_dia);
-            healthParam.put(   "heart_rate",heart_rate);
-            healthParam.put(   "cholestorol",cholestorol);
-            healthParam.put(  "oxygen_saturation",oxygen_saturation);
-            healthParam.put(  "entry_type","manual");
-
-            healthParam.put(  "diabetes",diabetes);
-            healthParam.put(  "chd",chd);
-            healthParam.put(  "asthma",asthma);
-            healthParam.put(  "hypoxemia",hypoxemia);
-            healthParam.put(  "bronchi",bronchi);
-            healthParam.put(  "stress","No");
-            healthParam.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-            String format = simpleDateFormat.format(new Date());
-            String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            String currentTime = new SimpleDateFormat("hh-mm-ss").format(new Date());
-            healthParam.put(  "currentDate",currentDate);
-            healthParam.put(  "currentTime",currentTime);
-            Log.d("HomeActivity", "Current Timestamp: " + format);
-            healthParam.put("TIMESTAMP", format);
-
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            db.collection("users").document(user.getUid())
-                    .collection("health_data").document(currentDate)
-                    .collection("time_slot").document(currentTime)
-                    .set(healthParam)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                            Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-//                                            Log.w(TAG, "Error writing document", e);
-                        }
-                    });
-
-            db.collection("users").document(user.getUid())
-                    .collection("manual").document(currentDate)
-                    .collection("time_slot").document(currentTime)
-                    .set(healthParam)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                            Toast.makeText(ManualEntryActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-//                                            Log.w(TAG, "Error writing document", e);
-                        }
-                    });
 
 //            Toast.makeText(ManualEntryActivity.this, "Sumit function invoked Successfully", Toast.LENGTH_LONG).show();
 //            Log.d("function", "submit invoke");
@@ -555,7 +556,8 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void viewEntries(View view) {
-
+        Intent intent = new Intent(this, ViewEntriesActivity.class);
+        startActivity(intent);
     }
 
     @Override
