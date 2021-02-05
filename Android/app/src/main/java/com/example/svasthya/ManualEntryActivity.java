@@ -39,14 +39,31 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.gauriinfotech.commons.Commons;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ManualEntryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+    private String url = "http://" + "192.168.1.36" + ":" + 5000 + "/";
+    private String postBodyString;
+    private MediaType mediaType;
+    private RequestBody requestBody;
 
     //this is the pic pdf code used in file chooser
     final static int PICK_PDF_CODE = 2342;
@@ -89,6 +106,20 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private String cholestorol;
     private String oxygen_saturation;
     private String SelectedPDF;
+
+
+    private TextView diabetes_textview;
+    private TextView bronchi_textview;
+    private TextView hypoxemia_textview;
+    private TextView asthma_textview;
+    private TextView chd_textview;
+    private TextView stress_textview;
+
+    private String diabetes;
+    private String bronchi;
+    private String hypoxemia;
+    private String asthma;
+    private String chd ;
 
 
     @Override
@@ -381,6 +412,70 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                         }
                     });
 
+
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("post_meal", post_meal)
+                    .addFormDataPart("blood_sugar_level", blood_sugar_level)
+                    .addFormDataPart("breaths_per_minute", breaths_per_minute)
+                    .addFormDataPart("is_running", is_running)
+                    .addFormDataPart("breath_shortness_severity", breath_shortness_severity)
+                    .addFormDataPart("cough_frequency", cough_frequency)
+                    .addFormDataPart("cough_severity", cough_severity)
+                    .addFormDataPart("blood_pressure_sys", blood_pressure_sys)
+                    .addFormDataPart("blood_pressure_dia", blood_pressure_dia)
+                    .addFormDataPart("heart_rate", heart_rate)
+                    .addFormDataPart("cholestorol", cholestorol)
+                    .addFormDataPart("oxygen_saturation", oxygen_saturation)
+                    .build();
+            OkHttpClient okHttpClient = new OkHttpClient();
+            Request request = new Request
+                    .Builder()
+                    .post(requestBody)
+                    .url("http://" + "192.168.1.36" + ":" + 5000 + "/prediction_models")
+                    .build();
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(final Call call, final IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ManualEntryActivity.this, "Something went wrong:" + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            call.cancel();
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject obj = new JSONObject(response.body().string());
+                                diabetes = obj.getString("diabetes");
+                                bronchi = obj.getString("bronchi");
+                                hypoxemia =  obj.getString("hypoxemia");
+                                asthma =  obj.getString("asthma");
+                                chd =  obj.getString("chd");
+
+                                diabetes_textview.setText(diabetes);
+                                bronchi_textview.setText(bronchi);
+                                hypoxemia_textview.setText(hypoxemia);
+                                asthma_textview.setText(asthma);
+                                chd_textview.setText(chd);
+
+                                                Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+                            } catch (IOException | JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
+                }
+            });
         }
         else {
             Toast.makeText(ManualEntryActivity.this, "Please Enter all values", Toast.LENGTH_LONG).show();
@@ -391,6 +486,14 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
 
 
     }
+
+    private RequestBody buildRequestBody(String msg) {
+        postBodyString = msg;
+        mediaType = MediaType.parse("text/plain");
+        requestBody = RequestBody.create(postBodyString, mediaType);
+        return requestBody;
+    }
+
     public static String getDeviceId(Context context) {
 
         String deviceId;

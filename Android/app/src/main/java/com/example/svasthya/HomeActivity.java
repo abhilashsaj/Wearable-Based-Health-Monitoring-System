@@ -40,6 +40,7 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -214,6 +215,9 @@ public class HomeActivity extends AppCompatActivity {
                             healthParam.put(  "entry_type","iot device");
                             healthParam.put("DEVICE_ID", getDeviceId(HomeActivity.this));
 
+
+
+
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                             String format = simpleDateFormat.format(new Date());
                             Log.d("HomeActivity", "Current Timestamp: " + format);
@@ -249,7 +253,25 @@ public class HomeActivity extends AppCompatActivity {
                             oxygen_saturation_textview.setText(oxygen_saturation);
 //                            Toast.makeText(HomeActivity.this, "Calling Server...", Toast.LENGTH_SHORT).show();
 
-                            RequestBody requestBody = buildRequestBody("your message here");
+//                            RequestBody requestBody = buildRequestBody("your message here");
+
+
+                            RequestBody requestBody = new MultipartBody.Builder()
+                                    .setType(MultipartBody.FORM)
+                                    .addFormDataPart("post_meal", post_meal)
+                                    .addFormDataPart("blood_sugar_level", blood_sugar_level)
+                                    .addFormDataPart("breaths_per_minute", breaths_per_minute)
+                                    .addFormDataPart("is_running", is_running)
+                                    .addFormDataPart("breath_shortness_severity", breath_shortness_severity)
+                                    .addFormDataPart("cough_frequency", cough_frequency)
+                                    .addFormDataPart("cough_severity", cough_severity)
+                                    .addFormDataPart("blood_pressure_sys", blood_pressure_sys)
+                                    .addFormDataPart("blood_pressure_dia", blood_pressure_dia)
+                                    .addFormDataPart("heart_rate", heart_rate)
+                                    .addFormDataPart("cholestorol", cholestorol)
+                                    .addFormDataPart("oxygen_saturation", oxygen_saturation)
+                                    .build();
+
                             OkHttpClient okHttpClient = new OkHttpClient();
                             Request request = new Request
                                     .Builder()

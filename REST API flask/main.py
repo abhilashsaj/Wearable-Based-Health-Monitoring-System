@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, request
 from flask_restful import Api, Resource
 import pandas as pd
 import random 
@@ -53,12 +53,26 @@ class OpenAPI(Resource):
 
 class PredictionModels(Resource):
 	def post(self):		
+		post_meal = bool(request.form['post_meal'])
+		blood_sugar_level = int(request.form['blood_sugar_level'])
+		breaths_per_minute = int(request.form['breaths_per_minute'])
+		is_running = bool(request.form['is_running'])
+		breath_shortness_severity = int(request.form['breath_shortness_severity'])
+		cough_frequency = int(request.form['cough_frequency'])
+		cough_severity = int(request.form['cough_severity'])
+		blood_pressure_sys = int(request.form['blood_pressure_sys'])
+		blood_pressure_dia = int(request.form['blood_pressure_dia'])
+		heart_rate = int(request.form['heart_rate'])
+		cholestorol = int(request.form['cholestorol'])
+		oxygen_saturation = int(request.form['oxygen_saturation'])
+
+
 		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
 		# loaded_model.predict([100,True])
 		diabetes = "No"
-		if(loaded_model.predict([[100,True]]) == 0):
+		if(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
 			diabetes="No"
-		elif(loaded_model.predict([[100,True]]) == 0):
+		elif(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
 			diabetes="PreDiabetes"
 		else:
 			diabetes="Yes"
@@ -66,28 +80,28 @@ class PredictionModels(Resource):
 		loaded_model = pickle.load(open("bronchi.sav", 'rb'))
 
 		bronchi = "No"
-		if(loaded_model.predict([[22,20,8,8]]) == 0):
+		if(loaded_model.predict([[breaths_per_minute, breath_shortness_severity, cough_frequency,cough_severity]]) == 0):
 			bronchi="No"
 		else:
 			bronchi="Yes"
 
 		loaded_model = pickle.load(open("hypoxemia.sav", 'rb'))
 		hypoxemia = "No"
-		if(loaded_model.predict([[22]]) == 0):
+		if(loaded_model.predict([[int(oxygen_saturation)]]) == 0):
 			hypoxemia="No"
 		else:
 			hypoxemia="Yes"
 
 		loaded_model = pickle.load(open("asthma.sav", 'rb'))
 		asthma = "No"
-		if(loaded_model.predict([[92, 90,30] ]) == 0):
+		if(loaded_model.predict([[oxygen_saturation, heart_rate,breaths_per_minute] ]) == 0):
 			asthma="No"
 		else:
 			asthma="Yes"
 
 		loaded_model = pickle.load(open("CHD.sav", 'rb'))
 		chd = "No"
-		if(loaded_model.predict([[120,90, 90,200] ]) == 0):
+		if(loaded_model.predict([[blood_pressure_sys,blood_pressure_dia, heart_rate,cholestorol] ]) == 0):
 			chd="No"
 		else:
 			chd="Yes"

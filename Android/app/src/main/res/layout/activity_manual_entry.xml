@@ -46,6 +46,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
             <LinearLayout
                 android:id="@+id/zerothLayout"
@@ -121,6 +122,214 @@
                     />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/void0Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:background="@color/whiteColor"
+                android:weightSum="2">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Health Condition "
+                    android:background="@drawable/textlines"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackColor" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/zerothfirstLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteColor"
+
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Diabetes"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackColor" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:text="Hyoxemia"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="Asthma"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/zerothsecondLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@color/whiteColor"
+
+                android:weightSum="3">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/diabetes"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="No"
+                    android:background="@drawable/textlines"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/hypoxemia"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/textlines"
+                    android:paddingLeft="10dp"
+                    android:text="No"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/asthma"
+                    android:background="@drawable/textlines"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/zeroththirdLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                android:background="@color/whiteColor"
+                android:weightSum="3">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="CHD"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackColor" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Bronchi"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="Stress"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/zerothfourthLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="@color/whiteColor"
+                android:weightSum="3">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/chd"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="No"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/bronchi"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="No"
+                    android:textColor="@color/blackColor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/stress"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/firstLayout"
@@ -521,6 +730,9 @@
                 android:text="Submit"
                 android:onClick="submitToServer"
                 android:textColor="@color/whiteColor" />
+
         </LinearLayout>
+
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
