@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.side-menu{
+  display:flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0px;
+  width: 320px;
+  height: 100%;
+  background-color: #253053;
+}
