@@ -15,6 +15,9 @@ const useStyles = makeStyles({
         fontSize: '0.8rem',
         '&:hover':{
             backgroundColor: '#f7f7f7'
+        },
+        '& .MuiSvgicon root': {
+            marginRight: '8px'
         }
     },
     
