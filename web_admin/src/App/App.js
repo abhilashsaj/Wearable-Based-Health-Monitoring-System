@@ -2,8 +2,8 @@ import './App.css';
 import SideMenu from '../components/SideMenu';
 import { makeStyles, CssBaseline } from '@material-ui/core';
 import Header from '../components/Header';
-
-
+import PageHeader from '../components/PageHeader'
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 const useStyles = makeStyles({
   appMain: {
     paddingLeft: '320px',
@@ -19,6 +19,11 @@ function App() {
       <SideMenu/>
       <div className={classes.appMain}>
         <Header/>
+        <PageHeader
+        title="Page Header"
+        subtitle ="Page Description" 
+        icon = {<PeopleOutlineIcon fontSize="large"/>}
+        />
       </div>
       <CssBaseline/>
     </>
