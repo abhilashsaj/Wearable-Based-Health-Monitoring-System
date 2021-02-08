@@ -32,7 +32,7 @@ class App extends React.Component {
       <Resource name="user_health" 
       list={userHealthList} 
       show={userHealthShow}/>
-      <Resource name="manual" list={ListGuesser} />
+      <Resource name="users_manual" list={ListGuesser} />
         <Resource
           name="posts"
           list={PostList}
