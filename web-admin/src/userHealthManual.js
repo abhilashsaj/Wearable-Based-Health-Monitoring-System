@@ -18,6 +18,8 @@ import {
   EditButton,
   DeleteButton,
   RichTextField,
+  BooleanField,
+  ChipField,
   SelectInput,
   FileField,
   FileInput
@@ -38,9 +40,9 @@ export const userHealthManualList = (props) => (
         <TextField source="username" />
         <TextField source="currentTime" />
         <TextField source="currentDate" />
-        <TextField source="entry_type" />
+        <ChipField source="entry_type" />
 
-        <TextField source="post_meal" />
+        <BooleanField source="post_meal" />
         <TextField source="blood_sugar_level" />
         <TextField source="breaths_per_minute" />
         <TextField source="is_running" />
@@ -52,7 +54,6 @@ export const userHealthManualList = (props) => (
         <TextField source="heart_rate" />
         <TextField source="cholestorol" />
         <TextField source="oxygen_saturation" />
-        <TextField source="entry_type" />
         <TextField source="diabetes" />
         <TextField source="chd" />
         <TextField source="asthma" />
