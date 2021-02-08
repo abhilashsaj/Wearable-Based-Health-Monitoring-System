@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -455,7 +456,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                 healthParam.put("TIMESTAMP", format);
 
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                db.collection("users").document(user.getUid())
+                                db.collection("users_manual").document(user.getUid())
                                         .collection("health_data").document(currentDate)
                                         .collection("time_slot").document(currentTime)
                                         .set(healthParam)
@@ -473,6 +474,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                             }
                                         });
 
+
                                 db.collection("users").document(user.getUid())
                                         .collection("manual").document(format)
                                         .set(healthParam)
@@ -487,6 +489,23 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
 //                                            Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
+
+                                healthParam.put("username", user.getEmail());
+                                healthParam.put("UID", user.getUid());
+
+                                db.collection("users_manual").add(healthParam)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+//                                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+//                                                Log.w(TAG, "Error adding document", e);
                                             }
                                         });
 

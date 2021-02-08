@@ -10,10 +10,12 @@ import CommentIcon from '@material-ui/icons/Comment';
 import CustomLoginPage from './CustomLoginPage';
 
 import { firebaseConfig as config } from './FIREBASE_CONFIG';
+import { userHealthList, userHealthShow } from "./userHealth";
 
 
 const options = {
   logging: true,
+  watch: ['user_health'],
 }
 const dataProvider = FirebaseDataProvider(config, options);
 const authProvider = FirebaseAuthProvider(config, options);
@@ -27,7 +29,9 @@ class App extends React.Component {
         authProvider={authProvider}
       >
       <Resource name="users" list={ListGuesser} />
-      <Resource name="user_health" list={ListGuesser} />
+      <Resource name="user_health" 
+      list={userHealthList} 
+      show={userHealthShow}/>
       <Resource name="manual" list={ListGuesser} />
         <Resource
           name="posts"
