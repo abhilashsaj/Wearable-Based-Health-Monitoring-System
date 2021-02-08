@@ -12,6 +12,10 @@ import CustomLoginPage from './CustomLoginPage';
 import { firebaseConfig as config } from './FIREBASE_CONFIG';
 import { userHealthList, userHealthShow } from "./userHealth";
 import { userHealthManualList, userHealthManualShow } from "./userHealthManual";
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import DescriptionIcon from '@material-ui/icons/Description';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 const options = {
   logging: true,
@@ -28,31 +32,23 @@ class App extends React.Component {
         dataProvider={dataProvider}
         authProvider={authProvider}
       >
-      <Resource name="user_health" 
+      <Resource name="user_health"
+      icon={PeopleOutlineIcon} 
       list={userHealthList} 
       show={userHealthShow}/>
-      <Resource name="user_health_record" list={ListGuesser} icon={CommentIcon}/>
-      
+
       <Resource 
       name="users_manual" 
+      icon= {DescriptionIcon}
       list={userHealthManualList} 
       show={userHealthManualShow}/>
-      <Resource name="users" list={ListGuesser} />
-        <Resource
-          name="posts"
-          list={PostList}
-          show={PostShow}
-          create={PostCreate}
-          edit={PostEdit}
-        />
-        <Resource
-          name="comments"
-          icon={CommentIcon}
-          list={CommentList}
-          show={CommentShow}
-          create={CommentCreate}
-          edit={CommentEdit}
-        />
+
+      
+      <Resource name="user_health_record" list={ListGuesser} icon={AssignmentIndIcon}/>
+      
+      
+      <Resource name="users" list={ListGuesser} icon={PeopleAltIcon}/>
+        
       </Admin>
     );
   }

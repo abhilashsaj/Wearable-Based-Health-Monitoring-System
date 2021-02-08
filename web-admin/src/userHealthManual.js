@@ -18,10 +18,10 @@ import {
   EditButton,
   DeleteButton,
   RichTextField,
-  BooleanField,
   ChipField,
   SelectInput,
   FileField,
+  DateField,
   FileInput
 } from "react-admin";
 
@@ -39,10 +39,10 @@ export const userHealthManualList = (props) => (
         <TextField source="UID" />
         <TextField source="username" />
         <TextField source="currentTime" />
-        <TextField source="currentDate" />
+        <DateField source="currentDate" />
         <ChipField source="entry_type" />
 
-        <BooleanField source="post_meal" />
+        <TextField source="post_meal" />
         <TextField source="blood_sugar_level" />
         <TextField source="breaths_per_minute" />
         <TextField source="is_running" />
