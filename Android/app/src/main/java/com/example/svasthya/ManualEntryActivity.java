@@ -234,6 +234,18 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                         Map<String, Object> file = new HashMap<>();
                         file.put("name", upload.getName());
                         file.put("url", upload.getUrl());
+                        file.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+                        String format = simpleDateFormat.format(new Date());
+                        String currentDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                        String currentTime = new SimpleDateFormat("hh:mm:ss").format(new Date());
+                        file.put(  "currentDate",currentDate);
+                        file.put(  "currentTime",currentTime);
+                        file.put("username", user.getEmail());
+                        file.put("UID", user.getUid());
+                        Log.d("HomeActivity", "Current Timestamp: " + format);
+//                        file.put("TIMESTAMP", format);
 
                         db.collection("users").document(user.getUid()).collection("health_records").document(format)
                                 .set(file)
@@ -248,6 +260,20 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Log.w("Fail", "Error writing document", e);
+                                    }
+                                });
+
+                        db.collection("user_health_record").add(file)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+//                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+//                                        Log.w(TAG, "Error adding document", e);
                                     }
                                 });
 //                    Toast.makeText(ManualEntryActivity.this, "Upload Done", Toast.LENGTH_LONG).show();
