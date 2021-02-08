@@ -4,6 +4,7 @@ import { makeStyles, CssBaseline } from '@material-ui/core';
 import Header from '../components/Header';
 import PageHeader from '../components/PageHeader'
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import EnhancedTable from '../components/EnhancedTable';
 const useStyles = makeStyles({
   appMain: {
     paddingLeft: '320px',
@@ -24,6 +25,7 @@ function App() {
         subtitle ="Page Description" 
         icon = {<PeopleOutlineIcon fontSize="large"/>}
         />
+        <EnhancedTable/>
       </div>
       <CssBaseline/>
     </>

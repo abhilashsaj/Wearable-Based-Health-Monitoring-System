@@ -34,6 +34,24 @@ app = Flask(__name__)
 api = Api(app)
 
 class OpenAPI(Resource):
+
+	def get(self):
+		return {'post_meal': bool(random.getrandbits(1)),
+			'blood_sugar_level': random.randint(0,400),
+	        'breaths_per_minute': random.randint(10,30),
+	        'is_running': bool(random.getrandbits(1)),
+	        'breath_shortness_severity': random.randint(0,10),
+	        'cough_frequency': random.randint(0,10),
+	        'cough_severity': random.randint(0,10),
+	        
+	        'blood_pressure_sys': random.randint(50,250),
+	        'blood_pressure_dia': random.randint(50,250),
+	        'heart_rate': random.randint(60,200),
+	        'cholestorol': random.randint(60,200),
+	        'oxygen_saturation': random.randint(90,100)
+	        }
+		
+
 	def post(self):
 		return {'post_meal': bool(random.getrandbits(1)),
 		'blood_sugar_level': random.randint(0,400),
@@ -52,6 +70,63 @@ class OpenAPI(Resource):
         
 
 class PredictionModels(Resource):
+
+	def get(self):
+		post_meal = bool(request.form['post_meal'])
+		blood_sugar_level = int(request.form['blood_sugar_level'])
+		breaths_per_minute = int(request.form['breaths_per_minute'])
+		is_running = bool(request.form['is_running'])
+		breath_shortness_severity = int(request.form['breath_shortness_severity'])
+		cough_frequency = int(request.form['cough_frequency'])
+		cough_severity = int(request.form['cough_severity'])
+		blood_pressure_sys = int(request.form['blood_pressure_sys'])
+		blood_pressure_dia = int(request.form['blood_pressure_dia'])
+		heart_rate = int(request.form['heart_rate'])
+		cholestorol = int(request.form['cholestorol'])
+		oxygen_saturation = int(request.form['oxygen_saturation'])
+
+
+		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
+		# loaded_model.predict([100,True])
+		diabetes = "No"
+		if(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
+			diabetes="No"
+		elif(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
+			diabetes="PreDiabetes"
+		else:
+			diabetes="Yes"
+
+		loaded_model = pickle.load(open("bronchi.sav", 'rb'))
+
+		bronchi = "No"
+		if(loaded_model.predict([[breaths_per_minute, breath_shortness_severity, cough_frequency,cough_severity]]) == 0):
+			bronchi="No"
+		else:
+			bronchi="Yes"
+
+		loaded_model = pickle.load(open("hypoxemia.sav", 'rb'))
+		hypoxemia = "No"
+		if(loaded_model.predict([[int(oxygen_saturation)]]) == 0):
+			hypoxemia="No"
+		else:
+			hypoxemia="Yes"
+
+		loaded_model = pickle.load(open("asthma.sav", 'rb'))
+		asthma = "No"
+		if(loaded_model.predict([[oxygen_saturation, heart_rate,breaths_per_minute] ]) == 0):
+			asthma="No"
+		else:
+			asthma="Yes"
+
+		loaded_model = pickle.load(open("CHD.sav", 'rb'))
+		chd = "No"
+		if(loaded_model.predict([[blood_pressure_sys,blood_pressure_dia, heart_rate,cholestorol] ]) == 0):
+			chd="No"
+		else:
+			chd="Yes"
+
+		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+
 	def post(self):		
 		post_meal = bool(request.form['post_meal'])
 		blood_sugar_level = int(request.form['blood_sugar_level'])
