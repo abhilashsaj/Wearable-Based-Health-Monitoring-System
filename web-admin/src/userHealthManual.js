@@ -23,21 +23,23 @@ import {
   FileInput
 } from "react-admin";
 
-const UserHealthFilter = (props) => (
+const UserHealthFilterManual = (props) => (
   <Filter {...props}>
     <TextInput label="Search" source="username" alwaysOn />
   </Filter>
 );
 
-export const userHealthList = (props) => (
-  <List {...props} filters={<UserHealthFilter />}>
-    <Datagrid rowClick="edit"> 
+export const userHealthManualList = (props) => (
+  <List {...props} filters={<UserHealthFilterManual />}>
+    <Datagrid > 
+        
         <TextField source="DEVICE_ID" />
         <TextField source="UID" />
         <TextField source="username" />
         <TextField source="currentTime" />
         <TextField source="currentDate" />
         <TextField source="entry_type" />
+
         <TextField source="post_meal" />
         <TextField source="blood_sugar_level" />
         <TextField source="breaths_per_minute" />
@@ -63,7 +65,7 @@ export const userHealthList = (props) => (
   </List>
 );
 
-export const userHealthShow = (props) => (
+export const userHealthManualShow = (props) => (
   <Show {...props}>
     <SimpleShowLayout>
       <TextField source="id" />

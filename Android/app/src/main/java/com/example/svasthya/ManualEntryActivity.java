@@ -254,56 +254,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                     }
 
                 });
-//
-//        sRef.putFile(data)
-//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @SuppressWarnings("VisibleForTests")
-//                    @Override
-//
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        progressBar.setVisibility(View.GONE);
-//                        textViewStatus.setText("File Uploaded Successfully");
-//                        Toast.makeText(getApplicationContext(), "Successfully uploaded file to storage", Toast.LENGTH_LONG).show();
-//
-//                        Upload upload = new Upload(editTextFilename.getText().toString(), taskSnapshot.getStorage().getDownloadUrl().toString());
-//
-//
-//                        Map<String, Object> file = new HashMap<>();
-//                        file.put("name", upload.getName());
-//                        file.put("url", taskSnapshot.);
-//
-//                        db.collection("users").document(user.getUid()).collection("health_records").document(format)
-//                                .set(file)
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                            Log.d("Success", "DocumentSnapshot successfully written!");
-//                                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                            Log.w("Fail", "Error writing document", e);
-//                                    }
-//                                });
-////                        mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception exception) {
-//                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                })
-//                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                    @SuppressWarnings("VisibleForTests")
-//                    @Override
-//                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-//                        textViewStatus.setText((int) progress + "% Uploading...");
-//                    }
-//                });
+
             }
         })
         .addOnFailureListener(new OnFailureListener() {

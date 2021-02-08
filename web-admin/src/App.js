@@ -11,7 +11,7 @@ import CustomLoginPage from './CustomLoginPage';
 
 import { firebaseConfig as config } from './FIREBASE_CONFIG';
 import { userHealthList, userHealthShow } from "./userHealth";
-
+import { userHealthManualList, userHealthManualShow } from "./userHealthManual";
 
 const options = {
   logging: true,
@@ -32,7 +32,11 @@ class App extends React.Component {
       <Resource name="user_health" 
       list={userHealthList} 
       show={userHealthShow}/>
-      <Resource name="users_manual" list={ListGuesser} />
+      <Resource 
+      name="users_manual" 
+      list={ListGuesser} 
+      list={userHealthManualList} 
+      show={userHealthManualShow}/>
         <Resource
           name="posts"
           list={PostList}
