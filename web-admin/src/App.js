@@ -28,15 +28,16 @@ class App extends React.Component {
         dataProvider={dataProvider}
         authProvider={authProvider}
       >
-      <Resource name="users" list={ListGuesser} />
       <Resource name="user_health" 
       list={userHealthList} 
       show={userHealthShow}/>
+      <Resource name="user_health_record" list={ListGuesser} icon={CommentIcon}/>
+      
       <Resource 
       name="users_manual" 
-      list={ListGuesser} 
       list={userHealthManualList} 
       show={userHealthManualShow}/>
+      <Resource name="users" list={ListGuesser} />
         <Resource
           name="posts"
           list={PostList}
