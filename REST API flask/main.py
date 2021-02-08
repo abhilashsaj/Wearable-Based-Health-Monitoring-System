@@ -23,6 +23,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.naive_bayes import GaussianNB
 from sklearn import model_selection
+
+from flask_cors import CORS
+	
 # from sklearn.ensemble import BaggingClassifier
 # from sklearn.ensemble import ExtraTreesClassifier
 # from sklearn.ensemble import AdaBoostClassifier
@@ -31,11 +34,13 @@ from sklearn import model_selection
 # from sklearn.metrics import roc_curve, roc_auc_score
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 class OpenAPI(Resource):
 
 	def get(self):
+		# response.headers["X-Total-Count"] = "1"
 		return {'post_meal': bool(random.getrandbits(1)),
 			'blood_sugar_level': random.randint(0,400),
 	        'breaths_per_minute': random.randint(10,30),
@@ -50,7 +55,7 @@ class OpenAPI(Resource):
 	        'cholestorol': random.randint(60,200),
 	        'oxygen_saturation': random.randint(90,100)
 	        }
-		
+
 
 	def post(self):
 		return {'post_meal': bool(random.getrandbits(1)),

@@ -326,6 +326,21 @@ public class HomeActivity extends AppCompatActivity {
 //                                            Log.w(TAG, "Error writing document", e);
                                                 }
                                             });
+                                    healthParam.put("username", user.getEmail());
+                                    healthParam.put("UID", user.getUid());
+                                    db.collection("user_health").document(user.getUid()).set(healthParam)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+//                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+//                                            Log.w(TAG, "Error writing document", e);
+                                                }
+                                            });
 
 
                                 }
