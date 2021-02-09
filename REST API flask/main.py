@@ -72,7 +72,7 @@ class OpenAPI(Resource):
         'heart_rate': random.randint(60,200),
         'cholestorol': random.randint(60,200),
         'oxygen_saturation': random.randint(90,100),
-	     'lf/hf ratio': random.uniform(1,2)
+	     'lf/hf ratio': round(random.uniform(1,2),2)
         }
         
 
@@ -143,10 +143,21 @@ class PredictionModels(Resource):
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 	def post(self):		
-		post_meal = bool(request.form['post_meal'])
+		post_meal = True
+		if(request.form['post_meal'] == "true"):
+			post_meal = True
+		else: 
+			post_meal = False
+
+
 		blood_sugar_level = int(request.form['blood_sugar_level'])
 		breaths_per_minute = int(request.form['breaths_per_minute'])
-		is_running = bool(request.form['is_running'])
+		is_running= True
+		if(request.form['is_running'] == "true"):
+			is_running = True
+		else: 
+			is_running = False
+
 		breath_shortness_severity = int(request.form['breath_shortness_severity'])
 		cough_frequency = int(request.form['cough_frequency'])
 		cough_severity = int(request.form['cough_severity'])
@@ -199,11 +210,13 @@ class PredictionModels(Resource):
 
 		loaded_model = pickle.load(open("stress.sav", 'rb'))
 		stress = "No"
+
 		if(loaded_model.predict([[lf_hf_ratio, is_running] ]) == 0):
 			stress="No"
 		else:
 			stress="Yes"
-
+		print(lf_hf_ratio, is_running, stress)
+		print(post_meal)
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 

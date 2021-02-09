@@ -91,6 +91,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private EditText blood_pressure_dia_textview;
     private EditText heart_rate_textview;
     private EditText cholestorol_textview;
+    private EditText lf_hf_ratio_textview;
     private EditText oxygen_saturation_textview;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -106,6 +107,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private String heart_rate;
     private String cholestorol;
     private String oxygen_saturation;
+    private String lf_hf_ratio;
     private String SelectedPDF;
 
 
@@ -121,6 +123,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private String hypoxemia;
     private String asthma;
     private String chd ;
+    private String stress ;
 
 
     @Override
@@ -162,6 +165,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         heart_rate_textview = (EditText) findViewById(R.id.heart_rate);
         cholestorol_textview = (EditText) findViewById(R.id.cholestorol);
         oxygen_saturation_textview = (EditText) findViewById(R.id.oxygen_saturation);
+        lf_hf_ratio_textview = (EditText) findViewById(R.id.lf_hf_ratio);
 
         diabetes_textview = (TextView)findViewById(R.id.diabetes_m);
         bronchi_textview = (TextView)findViewById(R.id.bronchi_m);
@@ -330,6 +334,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         heart_rate = heart_rate_textview.getText().toString();
         cholestorol = cholestorol_textview.getText().toString();
         oxygen_saturation = oxygen_saturation_textview.getText().toString();
+        lf_hf_ratio = lf_hf_ratio_textview.getText().toString();
 
 
 
@@ -342,7 +347,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         !blood_pressure_dia.trim().isEmpty() &&
                 !heart_rate.trim().isEmpty() &&
         !cholestorol.trim().isEmpty() &&
-                !oxygen_saturation.trim().isEmpty())
+                !oxygen_saturation.trim().isEmpty() && !lf_hf_ratio.trim().isEmpty())
         {
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -358,6 +363,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                     .addFormDataPart("heart_rate", heart_rate)
                     .addFormDataPart("cholestorol", cholestorol)
                     .addFormDataPart("oxygen_saturation", oxygen_saturation)
+                    .addFormDataPart("lf_hf_ratio", lf_hf_ratio)
                     .build();
 
             OkHttpClient okHttpClient = new OkHttpClient();
@@ -391,12 +397,14 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                 hypoxemia =  obj.getString("hypoxemia");
                                 asthma =  obj.getString("asthma");
                                 chd =  obj.getString("chd");
+                                stress = obj.getString("stress");
 
                                 diabetes_textview.setText(diabetes);
                                 bronchi_textview.setText(bronchi);
                                 hypoxemia_textview.setText(hypoxemia);
                                 asthma_textview.setText(asthma);
                                 chd_textview.setText(chd);
+                                stress_textview.setText(stress);
 
 
                                 Map<String, Object> healthParam = new HashMap<>();
@@ -420,7 +428,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                 healthParam.put(  "asthma",asthma);
                                 healthParam.put(  "hypoxemia",hypoxemia);
                                 healthParam.put(  "bronchi",bronchi);
-                                healthParam.put(  "stress","No");
+                                healthParam.put(  "stress",stress);
                                 healthParam.put("DEVICE_ID", getDeviceId(ManualEntryActivity.this));
 
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
@@ -448,6 +456,8 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
 //                                            Log.w(TAG, "Error writing document", e);
+                                                Toast.makeText(ManualEntryActivity.this, "Failed", Toast.LENGTH_LONG).show();
+
                                             }
                                         });
 
@@ -466,6 +476,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
 //                                            Log.w(TAG, "Error writing document", e);
+                                                Toast.makeText(ManualEntryActivity.this, "Failed", Toast.LENGTH_LONG).show();
                                             }
                                         });
 

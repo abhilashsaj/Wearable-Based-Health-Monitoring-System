@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     private String heart_rate;
     private String cholestorol;
     private String oxygen_saturation;
+    private String lf_hf_ratio;
 
     private TextView post_meal_textview;
     private TextView blood_sugar_level_textview;
@@ -80,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView heart_rate_textview;
     private TextView cholestorol_textview;
     private TextView oxygen_saturation_textview;
+    private TextView lf_hf_ratio_textview;
     private FirebaseAuth mAuth;
 
 
@@ -95,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
     private String hypoxemia;
     private String asthma;
     private String chd ;
+    private String stress ;
 
 
     @Override
@@ -116,6 +119,7 @@ public class HomeActivity extends AppCompatActivity {
         heart_rate_textview = (TextView)findViewById(R.id.heart_rate);
         cholestorol_textview = (TextView)findViewById(R.id.cholestorol);
         oxygen_saturation_textview = (TextView)findViewById(R.id.oxygen_saturation);
+        lf_hf_ratio_textview = (TextView)findViewById(R.id.lf_hf_ratio);
 
         diabetes_textview = (TextView)findViewById(R.id.diabetes);
         bronchi_textview = (TextView)findViewById(R.id.bronchi);
@@ -197,6 +201,7 @@ public class HomeActivity extends AppCompatActivity {
                             heart_rate =  obj.getString("heart_rate");
                             cholestorol =  obj.getString("cholestorol");
                             oxygen_saturation =  obj.getString("oxygen_saturation");
+                            lf_hf_ratio =  obj.getString("lf/hf ratio");
 
 
                             post_meal_textview.setText(post_meal);
@@ -211,6 +216,7 @@ public class HomeActivity extends AppCompatActivity {
                             heart_rate_textview.setText(heart_rate);
                             cholestorol_textview.setText(cholestorol);
                             oxygen_saturation_textview.setText(oxygen_saturation);
+                            lf_hf_ratio_textview.setText(lf_hf_ratio);
 //                            Toast.makeText(HomeActivity.this, "Calling Server...", Toast.LENGTH_SHORT).show();
 
 //                            RequestBody requestBody = buildRequestBody("your message here");
@@ -230,6 +236,7 @@ public class HomeActivity extends AppCompatActivity {
                                     .addFormDataPart("heart_rate", heart_rate)
                                     .addFormDataPart("cholestorol", cholestorol)
                                     .addFormDataPart("oxygen_saturation", oxygen_saturation)
+                                    .addFormDataPart("lf_hf_ratio", lf_hf_ratio)
                                     .build();
 
                             OkHttpClient okHttpClient = new OkHttpClient();
@@ -263,14 +270,16 @@ public class HomeActivity extends AppCompatActivity {
                                                 hypoxemia =  obj.getString("hypoxemia");
                                                 asthma =  obj.getString("asthma");
                                                 chd =  obj.getString("chd");
+                                                stress =  obj.getString("stress");
 
                                                 diabetes_textview.setText(diabetes);
                                                 bronchi_textview.setText(bronchi);
                                                 hypoxemia_textview.setText(hypoxemia);
                                                 asthma_textview.setText(asthma);
                                                 chd_textview.setText(chd);
+                                                stress_textview.setText(stress);
 
-//                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
                                             }
@@ -290,6 +299,7 @@ public class HomeActivity extends AppCompatActivity {
                                     healthParam.put(   "heart_rate",heart_rate);
                                     healthParam.put(   "cholestorol",cholestorol);
                                     healthParam.put(  "oxygen_saturation",oxygen_saturation);
+                                    healthParam.put(  "lf_hf_ratio",lf_hf_ratio);
                                     healthParam.put(  "entry_type","iot device");
                                     healthParam.put("DEVICE_ID", getDeviceId(HomeActivity.this));
 
@@ -298,7 +308,7 @@ public class HomeActivity extends AppCompatActivity {
                                     healthParam.put(  "asthma",asthma);
                                     healthParam.put(  "hypoxemia",hypoxemia);
                                     healthParam.put(  "bronchi",bronchi);
-                                    healthParam.put(  "stress","No");
+                                    healthParam.put(  "stress",stress);
 
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                                     String format = simpleDateFormat.format(new Date());

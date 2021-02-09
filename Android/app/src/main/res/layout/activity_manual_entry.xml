@@ -407,6 +407,39 @@
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
 
             <LinearLayout
+                android:id="@+id/secondLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="LF HF Ratio"
+                    android:textColor="@color/blackColor" />
+
+                <EditText
+                    android:id="@+id/lf_hf_ratio"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1.4"
+                    android:paddingLeft="10dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:id="@+id/thirdLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -688,7 +721,7 @@
                     android:layout_weight="0.6"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="cholestorol"
+                    android:text="Cholestorol"
                     android:textColor="@color/blackColor" />
 
                 <EditText
