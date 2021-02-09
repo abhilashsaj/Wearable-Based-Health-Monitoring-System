@@ -53,7 +53,8 @@ class OpenAPI(Resource):
 	        'blood_pressure_dia': random.randint(50,250),
 	        'heart_rate': random.randint(60,200),
 	        'cholestorol': random.randint(60,200),
-	        'oxygen_saturation': random.randint(90,100)
+	        'oxygen_saturation': random.randint(90,100),
+	        'lf/hf ratio': random.uniform(1,2)
 	        }
 
 
@@ -70,7 +71,8 @@ class OpenAPI(Resource):
         'blood_pressure_dia': random.randint(50,250),
         'heart_rate': random.randint(60,200),
         'cholestorol': random.randint(60,200),
-        'oxygen_saturation': random.randint(90,100)
+        'oxygen_saturation': random.randint(90,100),
+	     'lf/hf ratio': random.uniform(1,2)
         }
         
 
@@ -89,6 +91,7 @@ class PredictionModels(Resource):
 		heart_rate = int(request.form['heart_rate'])
 		cholestorol = int(request.form['cholestorol'])
 		oxygen_saturation = int(request.form['oxygen_saturation'])
+		lf_hf_ratio = float(request.form['lf_hf_ratio'])
 
 
 		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
@@ -130,7 +133,14 @@ class PredictionModels(Resource):
 		else:
 			chd="Yes"
 
-		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+		loaded_model = pickle.load(open("stress.sav", 'rb'))
+		stress = "No"
+		if(loaded_model.predict([[lf_hf_ratio, is_running] ]) == 0):
+			stress="No"
+		else:
+			stress="Yes"
+
+		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 	def post(self):		
 		post_meal = bool(request.form['post_meal'])
@@ -145,6 +155,7 @@ class PredictionModels(Resource):
 		heart_rate = int(request.form['heart_rate'])
 		cholestorol = int(request.form['cholestorol'])
 		oxygen_saturation = int(request.form['oxygen_saturation'])
+		lf_hf_ratio = float(request.form['lf_hf_ratio'])
 
 
 		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
@@ -186,7 +197,15 @@ class PredictionModels(Resource):
 		else:
 			chd="Yes"
 
-		return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+		loaded_model = pickle.load(open("stress.sav", 'rb'))
+		stress = "No"
+		if(loaded_model.predict([[lf_hf_ratio, is_running] ]) == 0):
+			stress="No"
+		else:
+			stress="Yes"
+
+		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 
 api.add_resource(OpenAPI, "/")
