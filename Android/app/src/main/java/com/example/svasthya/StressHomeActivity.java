@@ -15,7 +15,7 @@ public class StressHomeActivity extends AppCompatActivity {
     }
 
     public void five_min_meditation(View view) {
-        Intent intent = new Intent(StressHomeActivity.this, fi.class);
+        Intent intent = new Intent(StressHomeActivity.this, FiveMinMediation.class);
         startActivity(intent);
     }
 }
