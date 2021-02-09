@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ViewEntriesActivity"></activity>
+        <activity android:name=".StressHomeActivity"></activity>
+        <activity android:name=".ViewEntriesActivity" />
         <activity android:name=".ViewUploadsActivity" />
         <activity android:name=".ManualEntryActivity" />
         <activity android:name=".HomeActivity" />

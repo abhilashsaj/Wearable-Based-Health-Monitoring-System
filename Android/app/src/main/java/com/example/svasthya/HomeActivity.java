@@ -403,4 +403,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this, ManualEntryActivity.class);
         startActivity(intent);
     }
+
+    public void goToStressActivity(View view) {
+        Intent intent = new Intent(HomeActivity.this, StressHomeActivity.class);
+        startActivity(intent);
+    }
 }

@@ -48,12 +48,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/imageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one TextView inside layout using weight property -->
+
+                <ImageView
+                    android:id="@+id/simpleImageView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:onClick="goToStressActivity"
+                    android:src="@drawable/stressed" /><!--set the source of an image view-->
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/void0Layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:background="@color/whiteColor"
                 android:weightSum="2">
