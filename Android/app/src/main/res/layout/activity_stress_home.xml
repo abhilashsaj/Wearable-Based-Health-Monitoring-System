@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".StressHomeActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connect">
+    <!-- LinearLayout Inside ScrollView -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/imageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- place one TextView and one TextView inside layout using weight property -->
+
+            <ImageView
+                android:id="@+id/simpleImageView"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:onClick="five_min_meditation"
+                android:src="@drawable/fiveminmeditation" /><!--set the source of an image view-->
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/imageLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- place one TextView and one TextView inside layout using weight property -->
+
+            <ImageView
+                android:id="@+id/simpleImageView2"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/mindful_breathing" /><!--set the source of an image view-->
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/imageLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="horizontal"
+            android:background="@color/whiteColor"
+            android:weightSum="2">
+
+            <!-- place one TextView and one TextView inside layout using weight property -->
+
+            <ImageView
+                android:id="@+id/simpleImageView3"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/lets_walk" /><!--set the source of an image view-->
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
