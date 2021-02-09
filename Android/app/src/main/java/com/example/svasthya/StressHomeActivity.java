@@ -20,5 +20,7 @@ public class StressHomeActivity extends AppCompatActivity {
     }
 
     public void goToSBreathingActivity(View view) {
+        Intent intent = new Intent(StressHomeActivity.this, BreathingActivity.class);
+        startActivity(intent);
     }
 }
