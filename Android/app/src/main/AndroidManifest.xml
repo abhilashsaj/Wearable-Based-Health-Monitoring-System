@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FiveMinMediation"></activity>
+        <activity android:name=".BreathingActivity"></activity>
+        <activity android:name=".FiveMinMediation" />
         <activity android:name=".StressHomeActivity" />
         <activity android:name=".ViewEntriesActivity" />
         <activity android:name=".ViewUploadsActivity" />

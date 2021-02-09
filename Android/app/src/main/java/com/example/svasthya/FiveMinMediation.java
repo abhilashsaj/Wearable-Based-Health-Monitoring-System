@@ -44,7 +44,7 @@ public class FiveMinMediation extends AppCompatActivity {
         tx1 = (TextView)findViewById(R.id.textView2);
         tx2 = (TextView)findViewById(R.id.textView3);
         tx3 = (TextView)findViewById(R.id.textView4);
-        tx3.setText("Song.mp3");
+        tx3.setText("Listen...");
 
         mediaPlayer = MediaPlayer.create(this, R.raw.five_min_meditation);
         seekbar = (SeekBar)findViewById(R.id.seekBar);

@@ -51,6 +51,7 @@
                 android:id="@+id/simpleImageView2"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
+                android:onClick="goToSBreathingActivity"
                 android:src="@drawable/mindful_breathing" /><!--set the source of an image view-->
         </LinearLayout>
         <LinearLayout
