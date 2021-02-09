@@ -654,7 +654,7 @@
                     android:layout_weight="1.4"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="cholestorol"
+                    android:text="Cholestorol"
                     android:textColor="@color/blackColor" />
 
                 <TextView
