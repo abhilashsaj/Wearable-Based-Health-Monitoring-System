@@ -17,6 +17,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.request.DataReadRequest;
+import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,9 +39,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -100,10 +108,22 @@ public class HomeActivity extends AppCompatActivity {
     private String stress ;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+//
+//        FitnessOptions fitnessOptions = FitnessOptions.builder()
+//                .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+//                .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+//                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+//                .build();
+
+
+//        Toast.makeText(HomeActivity.this, fitnessOptions.toString(), Toast.LENGTH_SHORT).show();
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -279,7 +299,7 @@ public class HomeActivity extends AppCompatActivity {
                                                 chd_textview.setText(chd);
                                                 stress_textview.setText(stress);
 
-                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+//                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {
                                                 e.printStackTrace();
                                             }
