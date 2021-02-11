@@ -240,10 +240,13 @@ public class HomeActivity extends AppCompatActivity {
 //                            Toast.makeText(HomeActivity.this, "Calling Server...", Toast.LENGTH_SHORT).show();
 
 //                            RequestBody requestBody = buildRequestBody("your message here");
-
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String email_id = user.getEmail();
+//                            Toast.makeText(HomeActivity.this, email + "hi", Toast.LENGTH_SHORT).show();
 
                             RequestBody requestBody = new MultipartBody.Builder()
                                     .setType(MultipartBody.FORM)
+                                    .addFormDataPart("ëmail_id", email_id)
                                     .addFormDataPart("post_meal", post_meal)
                                     .addFormDataPart("blood_sugar_level", blood_sugar_level)
                                     .addFormDataPart("breaths_per_minute", breaths_per_minute)
@@ -291,6 +294,7 @@ public class HomeActivity extends AppCompatActivity {
                                                 asthma =  obj.getString("asthma");
                                                 chd =  obj.getString("chd");
                                                 stress =  obj.getString("stress");
+                                                String status = obj.getString("status");
 
                                                 diabetes_textview.setText(diabetes);
                                                 bronchi_textview.setText(bronchi);
@@ -298,6 +302,8 @@ public class HomeActivity extends AppCompatActivity {
                                                 asthma_textview.setText(asthma);
                                                 chd_textview.setText(chd);
                                                 stress_textview.setText(stress);
+
+                                                Toast.makeText(HomeActivity.this, status, Toast.LENGTH_LONG).show();
 
 //                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {

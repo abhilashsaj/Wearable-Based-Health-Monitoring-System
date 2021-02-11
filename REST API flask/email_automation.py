@@ -12,16 +12,56 @@ db = firestore.client()
 
 server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
-server.login('abhilashsajtest@gmail.com','tcsinframind')
+server.login('abhilashsajtest2@gmail.com','tcsinframind')
 
-from datetime import datetime, timedelta
-from threading import Timer
+docs = db.collection(u'users').stream()
+for doc in docs:
+	user_doc = doc.to_dict()
+	uid = user_doc['uid']
+	email = user_doc['email']
+	print(uid,email)
 
-x=datetime.today()
-y = x.replace(day=x.day, hour=1, minute=0, second=0, microsecond=0) + timedelta(days=1)
-delta_t=y-x
+	doc_ref = db.collection('user_health').document(uid)
+	doc = doc_ref.get()
 
-secs=delta_t.total_seconds()
+	if doc.exists:
+		# print(f'Document data: {doc.to_dict()}')
+		user_health = doc.to_dict()
+
+		chd = "\nCHD: " + user_health['chd']
+		diabetes = "\nDiabetes: " + user_health['diabetes']
+		hypoxemia = "\nHypoxemia: " + user_health['hypoxemia']
+		stress = "\nStress: " + user_health['stress']
+		bronchi = "\nBronchi: " + user_health['bronchi']
+		asthma = "\nAsthma: " + user_health['asthma']
+
+		health_status = "\nHealth Status: \n" +chd+ diabetes+hypoxemia+ stress+ bronchi+asthma
+
+		message = """From: Abhilash Saj <abhilashsajtest2@gmail.com>
+		To: User <%s>
+		MIME-Version: 1.0
+		Content-type: text/html
+		Subject: Daily Health Update
+
+		%s
+		"""
+
+		# print(message % (email, health_status))
+		message = 'Subject: {}\n\n{}'.format("Daily User health report", health_status)
+		server.sendmail('abhilashsajtest2@gmail.com',email, message)
+		print(f'Document data: {doc.to_dict()}')
+		
+	else:
+		print(u'No such document!')
+
+# from datetime import datetime, timedelta
+# from threading import Timer
+
+# x=datetime.today()
+# y = x.replace(day=x.day, hour=1, minute=0, second=0, microsecond=0) + timedelta(days=1)
+# delta_t=y-x
+
+# secs=delta_t.total_seconds()
 
 def hello_world():
 	docs = db.collection(u'users').stream()
@@ -47,27 +87,24 @@ def hello_world():
 
 			health_status = "\nHealth Status: \n" +chd+ diabetes+hypoxemia+ stress+ bronchi+asthma
 
-			message = """From: From Person <from@fromdomain.com>
-			To: To Person <to@todomain.com>
+			message = """From: From Person <abhilashsaj@gmail.com>
+			To: To Person <%s>
 			MIME-Version: 1.0
 			Content-type: text/html
-			Subject: SMTP HTML e-mail test
+			Subject: Daily Health Update
 
-			This is an e-mail message to be sent in HTML format
-
-			<b>This is HTML message.</b>
-			<h1>This is headline.</h1>
+			%s
 			"""
 
-			print(message)
+			print(message % (email, health_status))
 			server.sendmail('abhilashsajtest@gmail.com','abhilashsaj@gmail.com', message)
 			# print(f'Document data: {doc.to_dict()}')
 			
 		else:
 			print(u'No such document!')
 
-t = Timer(secs, hello_world)
-t.start()
+# t = Timer(secs, hello_world)
+# t.start()
 
 
 

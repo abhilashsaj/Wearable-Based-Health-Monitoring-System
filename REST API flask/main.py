@@ -34,7 +34,7 @@ from flask_cors import CORS
 # from sklearn.metrics import roc_curve, roc_auc_score
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 api = Api(app)
 
 class OpenAPI(Resource):
@@ -79,6 +79,8 @@ class OpenAPI(Resource):
 class PredictionModels(Resource):
 
 	def get(self):
+		email = (request.form['email'])
+		print(email)
 		post_meal = bool(request.form['post_meal'])
 		blood_sugar_level = int(request.form['blood_sugar_level'])
 		breaths_per_minute = int(request.form['breaths_per_minute'])
@@ -143,7 +145,12 @@ class PredictionModels(Resource):
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 	def post(self):		
+		
 		post_meal = True
+		# email = (str(request.form['email_id']))
+		
+
+
 		if(request.form['post_meal'] == "true"):
 			post_meal = True
 		else: 
@@ -168,15 +175,17 @@ class PredictionModels(Resource):
 		oxygen_saturation = int(request.form['oxygen_saturation'])
 		lf_hf_ratio = float(request.form['lf_hf_ratio'])
 
-
+		message= ""
 		loaded_model = pickle.load(open('diabetes_prediction_model.sav', 'rb'))
 		# loaded_model.predict([100,True])
 		diabetes = "No"
 		if(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
 			diabetes="No"
 		elif(loaded_model.predict([[blood_sugar_level,post_meal]]) == 0):
+			message = message + "Warning! Blood Sugar Level very high\n"
 			diabetes="PreDiabetes"
 		else:
+			message = message + "Danger! Blood Sugar Level dangerously high\n"
 			diabetes="Yes"
 
 		loaded_model = pickle.load(open("bronchi.sav", 'rb'))
@@ -185,6 +194,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[breaths_per_minute, breath_shortness_severity, cough_frequency,cough_severity]]) == 0):
 			bronchi="No"
 		else:
+			message = message + "Warning! Abnormalities detected in respiration\n"
 			bronchi="Yes"
 
 		loaded_model = pickle.load(open("hypoxemia.sav", 'rb'))
@@ -192,6 +202,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[int(oxygen_saturation)]]) == 0):
 			hypoxemia="No"
 		else:
+			message = message + "Warning! Oxygen Saturation levels running low\n"
 			hypoxemia="Yes"
 
 		loaded_model = pickle.load(open("asthma.sav", 'rb'))
@@ -199,6 +210,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[oxygen_saturation, heart_rate,breaths_per_minute] ]) == 0):
 			asthma="No"
 		else:
+			message = message + "Warning! Abnormalities detected in respiration and heart_rate\n"
 			asthma="Yes"
 
 		loaded_model = pickle.load(open("CHD.sav", 'rb'))
@@ -206,6 +218,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[blood_pressure_sys,blood_pressure_dia, heart_rate,cholestorol] ]) == 0):
 			chd="No"
 		else:
+			message = message + "Warning! High cholestorol and BP detected in respiration and heart_rate\n"
 			chd="Yes"
 
 		loaded_model = pickle.load(open("stress.sav", 'rb'))
@@ -214,8 +227,11 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[lf_hf_ratio, is_running] ]) == 0):
 			stress="No"
 		else:
+			message = message + "Warning! Stress levels high...\n"
 			stress="Yes"
-		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+
+		print(message)
+		return {"status":message,"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 
