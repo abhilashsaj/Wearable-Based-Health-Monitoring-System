@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Walk"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".Walk" />
         <activity android:name=".BreathingActivity" />
         <activity android:name=".FiveMinMediation" />
         <activity android:name=".StressHomeActivity" />

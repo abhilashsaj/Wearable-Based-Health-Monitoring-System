@@ -434,4 +434,10 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this, StressHomeActivity.class);
         startActivity(intent);
     }
+
+    public void goToChatBot(View view) {
+
+        Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+        startActivity(intent);
+    }
 }

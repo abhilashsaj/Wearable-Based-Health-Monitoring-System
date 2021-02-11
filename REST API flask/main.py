@@ -3,6 +3,9 @@ from flask_restful import Api, Resource
 import pandas as pd
 import random 
 
+import smtplib
+import json
+
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -36,6 +39,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 # CORS(app)
 api = Api(app)
+
+try:
+	server = smtplib.SMTP('smtp.gmail.com',587)
+	server.starttls()
+	server.login('abhilashsajtest2@gmail.com','tcsinframind')
+except SMTPException:
+	print("Error: unable to send email")
+
 
 class OpenAPI(Resource):
 
@@ -142,15 +153,14 @@ class PredictionModels(Resource):
 		else:
 			stress="Yes"
 
+		
+
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 	def post(self):		
-		
+		print("invoked")
 		post_meal = True
-		# email = (str(request.form['email_id']))
 		
-
-
 		if(request.form['post_meal'] == "true"):
 			post_meal = True
 		else: 
@@ -230,7 +240,14 @@ class PredictionModels(Resource):
 			message = message + "Warning! Stress levels high...\n"
 			stress="Yes"
 
+
+		
+
+
+		message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
+		email = (str(request.form['email_id']))
 		print(message)
+		# server.sendmail('abhilashsajtest2@gmail.com',email, message)
 		return {"status":message,"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
