@@ -215,8 +215,6 @@ class PredictionModels(Resource):
 			stress="No"
 		else:
 			stress="Yes"
-		print(lf_hf_ratio, is_running, stress)
-		print(post_meal)
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
