@@ -124,6 +124,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private String asthma;
     private String chd ;
     private String stress ;
+    FirebaseUser user;
 
 
     @Override
@@ -131,6 +132,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_entry);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         mStorageReference = FirebaseStorage.getInstance().getReference();
 //        mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
 
@@ -351,6 +353,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         {
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
+                    .addFormDataPart("ëmail_id", user.getEmail())
                     .addFormDataPart("post_meal", post_meal)
                     .addFormDataPart("blood_sugar_level", blood_sugar_level)
                     .addFormDataPart("breaths_per_minute", breaths_per_minute)

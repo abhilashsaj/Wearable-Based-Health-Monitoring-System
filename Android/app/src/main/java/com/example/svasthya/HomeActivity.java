@@ -106,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
     private String asthma;
     private String chd ;
     private String stress ;
+    FirebaseUser user;
 
 
 
@@ -127,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         post_meal_textview = (TextView)findViewById(R.id.post_meal);
         blood_sugar_level_textview = (TextView)findViewById(R.id.blood_sugar_level);
         breaths_per_minute_textview = (TextView)findViewById(R.id.breaths_per_minute);
@@ -239,14 +241,14 @@ public class HomeActivity extends AppCompatActivity {
                             lf_hf_ratio_textview.setText(lf_hf_ratio);
 //                            Toast.makeText(HomeActivity.this, "Calling Server...", Toast.LENGTH_SHORT).show();
 
-//                            RequestBody requestBody = buildRequestBody("your message here");
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                            RequestBody requ  estBody = buildRequestBody("your message here");
+
                             String email_id = user.getEmail();
 //                            Toast.makeText(HomeActivity.this, email + "hi", Toast.LENGTH_SHORT).show();
 
                             RequestBody requestBody = new MultipartBody.Builder()
                                     .setType(MultipartBody.FORM)
-                                    .addFormDataPart("ëmail_id", email_id)
+                                    .addFormDataPart("email_id", user.getEmail().toString())
                                     .addFormDataPart("post_meal", post_meal)
                                     .addFormDataPart("blood_sugar_level", blood_sugar_level)
                                     .addFormDataPart("breaths_per_minute", breaths_per_minute)

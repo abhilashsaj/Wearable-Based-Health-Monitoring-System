@@ -240,14 +240,22 @@ class PredictionModels(Resource):
 			message = message + "Warning! Stress levels high...\n"
 			stress="Yes"
 
+		print("models run successfully")
 
 		
 
 
-		message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
-		email = (str(request.form['email_id']))
-		print(message)
-		# server.sendmail('abhilashsajtest2@gmail.com',email, message)
+		try: 			
+			# print(int(request.form['blood_sugar_level']))
+			email_message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
+			email_id = request.form['email_id']
+			# print("hii")
+			# server.sendmail('abhilashsajtest2@gmail.com',email, email_message)
+			print(email_message)
+		except:
+			print("An exception occurred email couldnt be send")
+
+		
 		return {"status":message,"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
