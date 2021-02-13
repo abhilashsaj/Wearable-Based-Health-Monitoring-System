@@ -56,6 +56,24 @@
                 android:src="@drawable/mindful_breathing" /><!--set the source of an image view-->
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/imageLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="horizontal"
+            android:background="@color/whiteColor"
+            android:weightSum="2">
+
+            <!-- place one TextView and one TextView inside layout using weight property -->
+
+            <ImageView
+                android:id="@+id/simpleImageView4"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:onClick="goToDinoGame"
+                android:src="@drawable/dino" /><!--set the source of an image view-->
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/imageLayout3"
             android:layout_width="match_parent"
             android:layout_height="250dp"
@@ -73,6 +91,7 @@
                 android:onClick="goToWalk"
                 android:src="@drawable/lets_walk" /><!--set the source of an image view-->
         </LinearLayout>
+
     </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

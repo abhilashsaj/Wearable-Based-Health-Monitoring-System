@@ -29,4 +29,8 @@ public class StressHomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToDinoGame(View view) {
+        Intent intent = new Intent(StressHomeActivity.this, DinoGame.class);
+        startActivity(intent);
+    }
 }
