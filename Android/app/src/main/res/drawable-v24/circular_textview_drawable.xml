@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid
+        android:color="@color/cirular_textview_background" />
+    <solid android:color="@android:color/white" />
+    <stroke android:width="10dip" android:color="@color/colorPrimary"/>
+
+    <size
+        android:width="240dp"
+        android:height="240dp" />
+
+    <corners
+        android:bottomLeftRadius="130dp"
+        android:bottomRightRadius="130dp"
+        android:topLeftRadius="130dp"
+        android:topRightRadius="130dp" />
+
+</shape>

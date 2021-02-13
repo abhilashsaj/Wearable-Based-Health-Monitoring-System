@@ -59,7 +59,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener, Step
     private StepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private Sensor accel;
-    private static final String TEXT_NUM_STEPS = "Number of Steps: ";
+    private static final String TEXT_NUM_STEPS = "";
     private int numSteps;
     TextView TvSteps ;
     Button BtnStart;
