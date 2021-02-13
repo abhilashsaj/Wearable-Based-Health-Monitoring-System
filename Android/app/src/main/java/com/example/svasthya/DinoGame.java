@@ -1,0 +1,13 @@
+package com.example.svasthya;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class DinoGame extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dino_game);
+    }
+}
