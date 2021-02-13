@@ -90,6 +90,8 @@ public class HomeActivity extends AppCompatActivity {
     private TextView cholestorol_textview;
     private TextView oxygen_saturation_textview;
     private TextView lf_hf_ratio_textview;
+    private TextView status_textview;
+
     private FirebaseAuth mAuth;
 
 
@@ -129,6 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        status_textview = (TextView)findViewById(R.id.status);
         post_meal_textview = (TextView)findViewById(R.id.post_meal);
         blood_sugar_level_textview = (TextView)findViewById(R.id.blood_sugar_level);
         breaths_per_minute_textview = (TextView)findViewById(R.id.breaths_per_minute);
@@ -305,7 +308,8 @@ public class HomeActivity extends AppCompatActivity {
                                                 chd_textview.setText(chd);
                                                 stress_textview.setText(stress);
 
-                                                Toast.makeText(HomeActivity.this, status, Toast.LENGTH_LONG).show();
+//                                                Toast.makeText(HomeActivity.this, status, Toast.LENGTH_LONG).show();
+                                                status_textview.setText(status.trim());
 
 //                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {

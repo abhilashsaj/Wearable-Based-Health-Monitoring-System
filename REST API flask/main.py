@@ -212,7 +212,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[int(oxygen_saturation)]]) == 0):
 			hypoxemia="No"
 		else:
-			message = message + "Warning! Oxygen Saturation levels running low\n"
+			message = message + "Warning! Oxygen Saturation levels running low..\n"
 			hypoxemia="Yes"
 
 		loaded_model = pickle.load(open("asthma.sav", 'rb'))
@@ -220,7 +220,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[oxygen_saturation, heart_rate,breaths_per_minute] ]) == 0):
 			asthma="No"
 		else:
-			message = message + "Warning! Abnormalities detected in respiration and heart_rate\n"
+			message = message + "Warning! Abnormalities detected in respiration and heart_rate.. \n"
 			asthma="Yes"
 
 		loaded_model = pickle.load(open("CHD.sav", 'rb'))
@@ -228,7 +228,7 @@ class PredictionModels(Resource):
 		if(loaded_model.predict([[blood_pressure_sys,blood_pressure_dia, heart_rate,cholestorol] ]) == 0):
 			chd="No"
 		else:
-			message = message + "Warning! High cholestorol and BP detected in respiration and heart_rate\n"
+			message = message + "Warning! High cholestorol and Blood Pressure detected...\n"
 			chd="Yes"
 
 		loaded_model = pickle.load(open("stress.sav", 'rb'))
@@ -239,6 +239,10 @@ class PredictionModels(Resource):
 		else:
 			message = message + "Warning! Stress levels high...\n"
 			stress="Yes"
+
+		if(message == ""):
+			message = "All Good!"
+
 
 		print("models run successfully")
 
@@ -252,7 +256,7 @@ class PredictionModels(Resource):
 			# print("hii")
 			# server.sendmail('abhilashsajtest2@gmail.com',email, email_message)
 			print(email_message)
-		except:
+		except smtplib.SMTPException:
 			print("An exception occurred email couldnt be send")
 
 		

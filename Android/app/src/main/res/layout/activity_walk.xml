@@ -16,15 +16,14 @@
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorPrimary"
-
-        android:textStyle="bold"
-
-        android:text="Take A Walk" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorPrimary"/>
+        android:textStyle="bold"
+        android:text="Take A Walk" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:background="@color/colorPrimary"/>-->
 
     <TextView
         android:id="@+id/tv_steps"
