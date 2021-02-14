@@ -1,388 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluewhite"
-    tools:context=".HomeActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="90dp"
-        android:layout_height="31dp"
-        android:background="@color/whiteColor"
-        android:onClick="logout"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
-        app:layout_constraintStart_toEndOf="@+id/connect"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04" />
 
-    <Button
-        android:id="@+id/connect"
-        android:layout_width="98dp"
-        android:layout_height="35dp"
-        android:background="@color/whiteColor"
-        android:onClick="syncValues"
-        android:text="Sync"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.399"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bluewhite"
+        tools:context=".HomeActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="fill_parent"
-        android:layout_height="631dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connect">
-        <!-- LinearLayout Inside ScrollView -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="90dp"
+            android:layout_height="31dp"
+            android:background="@color/whiteColor"
+            android:onClick="logout"
+            android:text="Logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.755"
+            app:layout_constraintStart_toEndOf="@+id/connect"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.04" />
+
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="98dp"
+            android:layout_height="35dp"
+            android:background="@color/whiteColor"
+            android:onClick="syncValues"
+            android:text="Sync"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.399"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.035" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="fill_parent"
+            android:layout_height="631dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/connect">
+            <!-- LinearLayout Inside ScrollView -->
             <LinearLayout
-                android:id="@+id/imageLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <ImageView
-                    android:id="@+id/simpleImageView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="150dp"
-                    android:onClick="goToStressActivity"
-                    android:src="@drawable/stressed" /><!--set the source of an image view-->
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/void0Layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Health Condition "
-                    android:background="@drawable/textlines"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackColor" />
-
-            </LinearLayout>
-
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/zerothfirstLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whiteColor"
-
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Diabetes"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackColor" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:paddingLeft="10dp"
-                    android:text="Hyoxemia"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="Asthma"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/zerothsecondLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-
-                android:weightSum="3">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/diabetes"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="No"
-                    android:background="@drawable/textlines"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/hypoxemia"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:background="@drawable/textlines"
-                    android:paddingLeft="10dp"
-                    android:text="No"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/asthma"
-                    android:background="@drawable/textlines"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:text="No"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/zeroththirdLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="3">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="CHD"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackColor" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Bronchi"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="Stress"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/zerothfourthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="3">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/chd"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="No"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/bronchi"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="No"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/stress"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:text="No"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/statusMainLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Summary "
-
-                    android:textStyle="bold"
-                    android:background="@drawable/textlines"
-                    android:textColor="@color/blackColor" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/statusSubLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:id="@+id/status"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/imageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="No updates yet.. "
-                    android:background="@drawable/textlines"
-                    android:lineSpacingMultiplier="1.5"
-                    android:textColor="@color/blackColor" />
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-            </LinearLayout>
+                    <!-- place one TextView and one TextView inside layout using weight property -->
 
-            <LinearLayout
-                android:id="@+id/chatbotMainLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Chatbot "
-                    android:textStyle="bold"
-                    android:onClick="goToChatBot"
-                    android:background="@drawable/textlines"
-                    android:textColor="@color/blackColor" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/chatbotLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:id="@+id/leftText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_alignParentStart="true"
-                    android:text="Hello How can I help you?!"
-                    android:padding="8dp"
-                    android:textColor="#212121"
-                    android:background="@drawable/left_background"
-                    android:elevation="2dp"
-
-                    />
+                    <ImageView
+                        android:id="@+id/simpleImageView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:onClick="goToStressActivity"
+                        android:src="@drawable/stressed" /><!--set the source of an image view-->
+                </LinearLayout>
 
 
                 <LinearLayout
-                    android:id="@+id/chatbotLayout2"
+                    android:id="@+id/void0Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Health Condition "
+                        android:background="@drawable/textlines"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/zerothfirstLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whiteColor"
+
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Diabetes"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackColor" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:text="Hyoxemia"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="Asthma"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/zerothsecondLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+
+                    android:weightSum="3">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/diabetes"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="No"
+                        android:background="@drawable/textlines"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/hypoxemia"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:background="@drawable/textlines"
+                        android:paddingLeft="10dp"
+                        android:text="No"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/asthma"
+                        android:background="@drawable/textlines"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:text="No"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/zeroththirdLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="3">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="CHD"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackColor" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Bronchi"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="Stress"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/zerothfourthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="3">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/chd"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="No"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/bronchi"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="No"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/stress"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:text="No"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/statusMainLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -390,515 +298,629 @@
                     android:background="@color/whiteColor"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:layout_width="292dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toStartOf="@+id/addBtn"
-                        android:layout_weight="1"
-                        android:background="@drawable/back_addtask"
-                        android:elevation="2dp">
+                    <!-- place one TextView and one TextView inside layout using weight property -->
 
-                        <EditText
-                            android:id="@+id/editText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="#fff"
-                            android:hint="Go to chatbot.. "
-                            android:minHeight="50dp"
-                            android:textSize="18sp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/addBtn"
-                        android:layout_width="50dp"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Summary "
 
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/back_fab"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="5dp"
-                        android:elevation="4dp"
-                        android:layout_centerInParent="true"
-                        >
-                        <ImageView
-                            android:id="@+id/fab_img"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                        android:textStyle="bold"
+                        android:background="@drawable/textlines"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/statusSubLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:text="No updates yet.. "
+                        android:background="@drawable/textlines"
+                        android:lineSpacingMultiplier="1.5"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chatbotMainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Chatbot "
+                        android:textStyle="bold"
+                        android:onClick="goToChatBot"
+                        android:background="@drawable/textlines"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/chatbotLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:id="@+id/leftText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_alignParentStart="true"
+                        android:text="Hello How can I help you?!"
+                        android:padding="8dp"
+                        android:textColor="#212121"
+                        android:background="@drawable/left_background"
+                        android:elevation="2dp"
+
+                        />
+
+
+                    <LinearLayout
+                        android:id="@+id/chatbotLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:background="@color/whiteColor"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:layout_width="292dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_toStartOf="@+id/addBtn"
+                            android:layout_weight="1"
+                            android:background="@drawable/back_addtask"
+                            android:elevation="2dp">
+
+                            <EditText
+                                android:id="@+id/editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:background="#fff"
+                                android:hint="Go to chatbot.. "
+                                android:minHeight="50dp"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/addBtn"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/back_fab"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:elevation="4dp"
                             android:layout_centerInParent="true"
-                            android:onClick="goToChatBot"
-                            android:src="@drawable/ic_send_white_24dp"
-                            app:tint="#fff"/>
-                    </RelativeLayout>
+                            >
+                            <ImageView
+                                android:id="@+id/fab_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerInParent="true"
+                                android:onClick="goToChatBot"
+                                android:src="@drawable/ic_send_white_24dp"
+                                app:tint="#fff"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
 
 
 
+                <LinearLayout
+                    android:id="@+id/voidLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="Measures "
+                        android:textStyle="bold"
+
+                        android:background="@drawable/textlines"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/firstLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Blood Sugar Level"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/blood_sugar_level"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/secondLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Breaths Per Minute"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/breaths_per_minute"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/secondLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="LF/HF Ratio"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/lf_hf_ratio"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/thirdLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Post Meal"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/post_meal"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/fourthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Running"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/is_running"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/fifthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Breath Shortness Severity"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/breath_shortness_severity"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/sixthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Cough Frequency"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/cough_frequency"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+                <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+                <LinearLayout
+                    android:id="@+id/seventhLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whiteColor"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Cough Severity"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/cough_severity"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/eightLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whiteColor"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Blood Pressure Sys"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/blood_pressure_sys"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ninthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Blood Pressure Dia"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/blood_pressure_dia"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tenthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whiteColor"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Heart Rate"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/heart_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/eleventhLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Cholestorol"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/cholestorol"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/twelvthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/whiteColor"
+                    android:weightSum="2">
+
+                    <!-- place one TextView and one TextView inside layout using weight property -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Oxygen Saturation"
+                        android:textColor="@color/blackColor" />
+
+                    <TextView
+                        android:id="@+id/oxygen_saturation"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.6"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/blackColor" />
+                </LinearLayout>
+
+
             </LinearLayout>
+        </ScrollView>
 
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:background="@color/whiteColor"
+            android:onClick="goToManual"
+            android:text="Manual"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/connect"
+            app:layout_constraintHorizontal_bias="0.685"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.035" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:menu="@menu/menu_home_drawer"
+         />
 
-            <LinearLayout
-                android:id="@+id/voidLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="Measures "
-                    android:textStyle="bold"
-
-                    android:background="@drawable/textlines"
-                    android:textColor="@color/blackColor" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/firstLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Blood Sugar Level"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/blood_sugar_level"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/secondLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Breaths Per Minute"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/breaths_per_minute"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/secondLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="LF/HF Ratio"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/lf_hf_ratio"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/thirdLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Post Meal"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/post_meal"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/fourthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Running"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/is_running"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/fifthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Breath Shortness Severity"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/breath_shortness_severity"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/sixthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Cough Frequency"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/cough_frequency"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
-
-            <LinearLayout
-                android:id="@+id/seventhLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whiteColor"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Cough Severity"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/cough_severity"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/eightLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whiteColor"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Blood Pressure Sys"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/blood_pressure_sys"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ninthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Blood Pressure Dia"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/blood_pressure_dia"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tenthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whiteColor"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Heart Rate"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/heart_rate"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/eleventhLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Cholestorol"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/cholestorol"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/twelvthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/whiteColor"
-                android:weightSum="2">
-
-                <!-- place one TextView and one TextView inside layout using weight property -->
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Oxygen Saturation"
-                    android:textColor="@color/blackColor" />
-
-                <TextView
-                    android:id="@+id/oxygen_saturation"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.6"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/blackColor" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="90dp"
-        android:layout_height="35dp"
-        android:background="@color/whiteColor"
-        android:onClick="goToManual"
-        android:text="Manual"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/connect"
-        app:layout_constraintHorizontal_bias="0.685"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

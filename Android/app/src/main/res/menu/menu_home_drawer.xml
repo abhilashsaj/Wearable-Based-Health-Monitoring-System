@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<group
+    android:id="@+id/group1"
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="Home"
+        android:checked="true" />
+    <item
+        android:id="@+id/sync"
+        android:icon="@drawable/sync"
+        android:title="Sync" />
+    <item
+        android:id="@+id/manual"
+        android:icon="@drawable/manual"
+        android:title="Manual Entry" />
+    <item
+        android:id="@+id/relax"
+        android:icon="@drawable/relax4"
+        android:title="Relax" />
+
+</group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/subtitle"
+            android:title="Stress Management">
+            <menu>
+                <item
+                    android:id="@+id/meditation"
+                    android:icon="@drawable/relax"
+                    android:title="Meditation" />
+                <item
+                    android:id="@+id/breathing"
+                    android:icon="@drawable/relax2"
+                    android:title="Breathing" />
+                <item
+                    android:id="@+id/dino"
+                    android:icon="@drawable/dino_ic"
+                    android:title="Dino Run" />
+                <item
+                    android:id="@+id/walk"
+                    android:icon="@drawable/walk"
+                    android:title="Take A Walk" />
+
+
+            </menu>
+        </item>
+    </group>
+    <group
+        android:id="@+id/group3"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+    </group>
+</menu>
