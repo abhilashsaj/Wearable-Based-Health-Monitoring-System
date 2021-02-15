@@ -169,7 +169,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:paddingLeft="10dp"
-                        android:text="No"
+                        android:text="-"
                         android:background="@drawable/textlines"
                         android:textColor="@color/blackColor" />
 
@@ -182,7 +182,7 @@
                         android:gravity="center"
                         android:background="@drawable/textlines"
                         android:paddingLeft="10dp"
-                        android:text="No"
+                        android:text="-"
                         android:textColor="@color/blackColor" />
 
                     <TextView
@@ -194,7 +194,7 @@
                         android:layout_weight="1"
                         android:paddingLeft="10dp"
                         android:gravity="center"
-                        android:text="No"
+                        android:text="-"
                         android:textColor="@color/blackColor" />
                 </LinearLayout>
 
@@ -262,7 +262,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:paddingLeft="10dp"
-                        android:text="No"
+                        android:text="-"
                         android:textColor="@color/blackColor" />
 
                     <TextView
@@ -273,7 +273,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:paddingLeft="10dp"
-                        android:text="No"
+                        android:text="-"
                         android:textColor="@color/blackColor" />
 
                     <TextView
@@ -284,7 +284,7 @@
                         android:layout_weight="1"
                         android:paddingLeft="10dp"
                         android:gravity="center"
-                        android:text="No"
+                        android:text="-"
                         android:textColor="@color/blackColor" />
                 </LinearLayout>
 

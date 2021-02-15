@@ -2,12 +2,14 @@ package com.example.svasthya;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.fitness.Fitness;
@@ -27,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -153,6 +158,63 @@ public class HomeActivity extends AppCompatActivity {
         asthma_textview = (TextView)findViewById(R.id.asthma);
         stress_textview = (TextView)findViewById(R.id.stress);
 
+
+        final DrawerLayout drawer=findViewById(R.id.drawer_layout);
+        NavigationView navigationView=findViewById(R.id.nav_view);
+//        final NavController navController=Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+                if (id==R.id.manual){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, ManualEntryActivity.class);
+                    startActivity(intent);
+                }
+                if (id==R.id.relax){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, StressHomeActivity.class);
+                    startActivity(intent);
+                }
+                if (id==R.id.relax){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, StressHomeActivity.class);
+                    startActivity(intent);
+                }
+                if (id==R.id.meditation){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, FiveMinMediation.class);
+                    startActivity(intent);
+                }
+                if (id==R.id.breathing){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, BreathingActivity.class);
+                    startActivity(intent);
+                }
+                if (id==R.id.dino){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, DinoGame.class);
+                    startActivity(intent);
+                }
+
+                if (id==R.id.walk){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, Walk.class);
+                    startActivity(intent);
+                }
+                //This is for maintaining the behavior of the Navigation view
+//                NavigationUI.onNavDestinationSelected(menuItem,navController);
+
+                //This is for closing the drawer after acting on it
+
+
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         postRequest("your message here", url);
 
@@ -341,6 +403,25 @@ public class HomeActivity extends AppCompatActivity {
                                     healthParam.put(  "hypoxemia",hypoxemia);
                                     healthParam.put(  "bronchi",bronchi);
                                     healthParam.put(  "stress",stress);
+
+                                    if(diabetes.equals("Yes")){
+                                        diabetes_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
+                                    if(chd.equals("Yes")){
+                                        chd_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
+                                    if(asthma.equals("Yes")){
+                                        asthma_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
+                                    if(bronchi.equals("Yes")){
+                                        bronchi_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
+                                    if(hypoxemia.equals("Yes")){
+                                        hypoxemia_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
+                                    if(stress.equals("Yes")){
+                                        stress_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+                                    }
 
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                                     String format = simpleDateFormat.format(new Date());

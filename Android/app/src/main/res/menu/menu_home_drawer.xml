@@ -2,17 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 <group
-    android:id="@+id/group1"
-    android:checkableBehavior="single">
+    android:id="@+id/group1">
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:title="Home"
         android:checked="true" />
-    <item
-        android:id="@+id/sync"
-        android:icon="@drawable/sync"
-        android:title="Sync" />
+
     <item
         android:id="@+id/manual"
         android:icon="@drawable/manual"
@@ -25,8 +21,7 @@
 </group>
 
     <group
-        android:id="@+id/group2"
-        android:checkableBehavior="single">
+        android:id="@+id/group2">
         <item
             android:id="@+id/subtitle"
             android:title="Stress Management">
