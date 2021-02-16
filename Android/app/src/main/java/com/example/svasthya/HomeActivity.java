@@ -107,12 +107,12 @@ public class HomeActivity extends AppCompatActivity {
     private TextView chd_textview;
     private TextView stress_textview;
 
-    private String diabetes;
-    private String bronchi;
-    private String hypoxemia;
-    private String asthma;
-    private String chd ;
-    private String stress ;
+    private String diabetes = "";
+    private String bronchi = "";
+    private String hypoxemia = "";
+    private String asthma = "";
+    private String chd  = "";
+    private String stress  = "";
     FirebaseUser user;
 
 
@@ -370,6 +370,72 @@ public class HomeActivity extends AppCompatActivity {
                                                 chd_textview.setText(chd);
                                                 stress_textview.setText(stress);
 
+                                                if(diabetes.equals("Yes") && diabetes!=null){
+                                                    diabetes_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    blood_sugar_level_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    diabetes_textview.setTextColor(Color.BLACK);
+                                                    blood_sugar_level_textview.setTextColor(Color.BLACK);
+                                                }
+                                                if(chd.equals("Yes" ) &&  chd!=null){
+                                                    chd_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    blood_pressure_dia_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    blood_pressure_sys_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    heart_rate_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    cholestorol_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    chd_textview.setTextColor(Color.BLACK);
+                                                    blood_pressure_dia_textview.setTextColor(Color.BLACK);
+                                                    blood_pressure_sys_textview.setTextColor(Color.BLACK);
+                                                    heart_rate_textview.setTextColor(Color.BLACK);
+                                                    cholestorol_textview.setTextColor(Color.BLACK);
+                                                }
+                                                if(asthma.equals("Yes") &&  asthma!=null){
+                                                    asthma_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    oxygen_saturation_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    heart_rate_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    cholestorol_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    asthma_textview.setTextColor(Color.BLACK);
+                                                    oxygen_saturation_textview.setTextColor(Color.BLACK);
+                                                    heart_rate_textview.setTextColor(Color.BLACK);
+                                                    cholestorol_textview.setTextColor(Color.BLACK);
+                                                }
+                                                if(bronchi.equals("Yes")&&  bronchi!=null){
+                                                    bronchi_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    breaths_per_minute_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    breath_shortness_severity_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    cough_frequency_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    cough_severity_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    bronchi_textview.setTextColor(Color.BLACK);
+                                                    breaths_per_minute_textview.setTextColor(Color.BLACK);
+                                                    breath_shortness_severity_textview.setTextColor(Color.BLACK);
+                                                    cough_frequency_textview.setTextColor(Color.BLACK);
+                                                    cough_severity_textview.setTextColor(Color.BLACK);
+                                                }
+                                                if(hypoxemia.equals("Yes")&&  hypoxemia!=null){
+                                                    hypoxemia_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    oxygen_saturation_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    hypoxemia_textview.setTextColor(Color.BLACK);
+                                                    oxygen_saturation_textview.setTextColor(Color.BLACK);
+                                                }
+                                                if(stress.equals("Yes") &&  stress!=null){
+                                                    stress_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                    lf_hf_ratio_textview.setTextColor(Color.parseColor("#DC143C"));
+                                                }
+                                                else{
+                                                    stress_textview.setTextColor(Color.BLACK);
+                                                    lf_hf_ratio_textview.setTextColor(Color.BLACK);
+                                                }
+
+
 //                                                Toast.makeText(HomeActivity.this, status, Toast.LENGTH_LONG).show();
                                                 status_textview.setText(status.trim());
 
@@ -404,24 +470,24 @@ public class HomeActivity extends AppCompatActivity {
                                     healthParam.put(  "bronchi",bronchi);
                                     healthParam.put(  "stress",stress);
 
-                                    if(diabetes.equals("Yes")){
-                                        diabetes_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
-                                    if(chd.equals("Yes")){
-                                        chd_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
-                                    if(asthma.equals("Yes")){
-                                        asthma_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
-                                    if(bronchi.equals("Yes")){
-                                        bronchi_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
-                                    if(hypoxemia.equals("Yes")){
-                                        hypoxemia_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
-                                    if(stress.equals("Yes")){
-                                        stress_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
-                                    }
+//                                    if(diabetes.equals("Yes") && diabetes!=null){
+//                                        diabetes_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
+//                                    if(chd.equals("Yes" ) &&  chd!=null){
+//                                        chd_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
+//                                    if(asthma.equals("Yes") &&  asthma!=null){
+//                                        asthma_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
+//                                    if(bronchi.equals("Yes")&&  bronchi!=null){
+//                                        bronchi_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
+//                                    if(hypoxemia.equals("Yes")&&  hypoxemia!=null){
+//                                        hypoxemia_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
+//                                    if(stress.equals("Yes") &&  stress!=null){
+//                                        stress_textview.setBackgroundColor(Color.parseColor("#ffcccb"));
+//                                    }
 
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                                     String format = simpleDateFormat.format(new Date());

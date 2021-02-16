@@ -52,6 +52,7 @@ class OpenAPI(Resource):
 
 	def get(self):
 		# response.headers["X-Total-Count"] = "1"
+		print("OpenAPI invoked")
 		return {'post_meal': bool(random.getrandbits(1)),
 			'blood_sugar_level': random.randint(0,400),
 	        'breaths_per_minute': random.randint(10,30),
@@ -70,6 +71,7 @@ class OpenAPI(Resource):
 
 
 	def post(self):
+		print("OpenAPI invoked")
 		return {'post_meal': bool(random.getrandbits(1)),
 		'blood_sugar_level': random.randint(0,400),
         'breaths_per_minute': random.randint(10,30),
@@ -158,7 +160,7 @@ class PredictionModels(Resource):
 		return {"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 	def post(self):		
-		print("invoked")
+		print("prediction models invoked")
 		post_meal = True
 		
 		if(request.form['post_meal'] == "true"):
