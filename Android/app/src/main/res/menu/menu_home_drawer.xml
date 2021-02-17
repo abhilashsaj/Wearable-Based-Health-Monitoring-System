@@ -17,6 +17,10 @@
         android:id="@+id/relax"
         android:icon="@drawable/relax4"
         android:title="Relax" />
+    <item
+        android:id="@+id/fitbit"
+        android:icon="@drawable/relax4"
+        android:title="Relax" />
 
 </group>
 
