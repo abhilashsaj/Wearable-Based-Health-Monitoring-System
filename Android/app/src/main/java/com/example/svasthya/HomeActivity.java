@@ -204,6 +204,11 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, Walk.class);
                     startActivity(intent);
                 }
+                if (id==R.id.fitbit){
+//                    Toast.makeText(getApplicationContext(), "Manual", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, FitbitApi.class);
+                    startActivity(intent);
+                }
                 //This is for maintaining the behavior of the Navigation view
 //                NavigationUI.onNavDestinationSelected(menuItem,navController);
 

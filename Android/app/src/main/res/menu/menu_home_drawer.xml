@@ -19,8 +19,8 @@
         android:title="Relax" />
     <item
         android:id="@+id/fitbit"
-        android:icon="@drawable/relax4"
-        android:title="Relax" />
+        android:icon="@drawable/fitness"
+        android:title="Fitbit API" />
 
 </group>
 

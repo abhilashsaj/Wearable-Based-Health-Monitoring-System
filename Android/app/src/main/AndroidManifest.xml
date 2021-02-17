@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DinoGame"></activity>
+        <activity android:name=".FitbitApi"></activity>
+        <activity android:name=".DinoGame" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".Walk" />
         <activity android:name=".BreathingActivity" />
