@@ -124,9 +124,9 @@ class OpenAPI(Resource):
 	        }
 		plain_text = json.dumps(health_data)
 		cipher = encrypt_with_AES(plain_text, secret_key, salt)
-		print("Cipher: " + cipher)
+		# print("Cipher: " + cipher)
 		decrypted = decrypt_with_AES(cipher, secret_key, salt)
-		print("Decrypted " + decrypted)
+		# print("Decrypted " + decrypted)
 		
 		return {"Cipher":cipher}
         
@@ -155,17 +155,13 @@ class EncryptionAES(Resource):
 	        }
 		plain_text = json.dumps(health_data)
 		cipher = encrypt_with_AES(plain_text, secret_key, salt)
-		print("Cipher: " + cipher)
+		# print("Cipher: " + cipher)
 		decrypted = decrypt_with_AES(cipher, secret_key, salt)
-		print("Decrypted " + decrypted)
+		# print("Decrypted " + decrypted)
 
 		return {"Plain Text":plain_text,"Cipher":cipher,"Decrypted": decrypted}
 
 		 
-
-
-
-
 
 
 
@@ -248,6 +244,14 @@ class PredictionModels(Resource):
 		else: 
 			post_meal = False
 
+		secret_key = "yourSecretKey"
+		salt = "anySaltYouCanUseOfOn"
+
+		email_cipher = request.form['uid']
+		print(email_cipher)
+
+		decrypted = decrypt_with_AES(email_cipher, secret_key, salt)
+		# print(decrypted)
 
 		blood_sugar_level = int(request.form['blood_sugar_level'])
 		breaths_per_minute = int(request.form['breaths_per_minute'])
@@ -337,12 +341,20 @@ class PredictionModels(Resource):
 			email_id = request.form['email_id']
 			# print("hii")
 			# server.sendmail('abhilashsajtest2@gmail.com',email, email_message)
-			print(email_message)
+			# print(email_message)
 		except smtplib.SMTPException:
 			print("An exception occurred email couldnt be send")
 
+		patient_record = {"status":message,"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+		plain_text = json.dumps(patient_record)
+
+		cipher = encrypt_with_AES(plain_text, secret_key, salt)
+		# print("Cipher: " + cipher)
+		decrypted = decrypt_with_AES(cipher, secret_key, salt)
+		# print("Decrypted " + decrypted)
 		
-		return {"status":message,"stress": stress,"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
+		return {"Cipher":cipher}
+
 		# return {"diabetes": diabetes, "bronchi": bronchi,"hypoxemia":hypoxemia, "asthma":asthma, "chd": chd}
 
 

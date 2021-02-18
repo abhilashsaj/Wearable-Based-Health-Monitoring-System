@@ -399,8 +399,16 @@ public class HomeActivity extends AppCompatActivity {
                             String email_id = user.getEmail();
 //                            Toast.makeText(HomeActivity.this, email + "hi", Toast.LENGTH_SHORT).show();
 
+                            final String fSalt = "anySaltYouCanUseOfOn";
+                            String plainText = user.getDisplayName();
+
+                            Log.e("Home",plainText);
+                            String cipherText2 = encrypt(secretKey, fSalt, plainText);
+//                            System.out.println("Cipher: " + cipherText);
+
                             RequestBody requestBody = new MultipartBody.Builder()
                                     .setType(MultipartBody.FORM)
+                                    .addFormDataPart("uid", cipherText2)
                                     .addFormDataPart("email_id", user.getEmail().toString())
                                     .addFormDataPart("post_meal", post_meal)
                                     .addFormDataPart("blood_sugar_level", blood_sugar_level)
@@ -442,7 +450,15 @@ public class HomeActivity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             try {
+//                                                JSONObject obj = new JSONObject(response.body().string());
                                                 JSONObject obj = new JSONObject(response.body().string());
+
+
+                                                String cipherText =  obj.getString("Cipher");
+                                                String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+//                            String json_string = obj.getString("Decrypted");
+
+                                                obj = new JSONObject(dcrCipherText);
                                                 diabetes = obj.getString("diabetes");
                                                 bronchi = obj.getString("bronchi");
                                                 hypoxemia =  obj.getString("hypoxemia");
@@ -529,6 +545,8 @@ public class HomeActivity extends AppCompatActivity {
 
 //                                                Toast.makeText(HomeActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                                             } catch (IOException | JSONException e) {
+                                                e.printStackTrace();
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
