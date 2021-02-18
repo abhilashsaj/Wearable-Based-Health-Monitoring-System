@@ -134,6 +134,7 @@ public class HomeActivity extends AppCompatActivity {
     private static String factoryInstance = "PBKDF2WithHmacSHA256";
     private static String cipherInstance = "AES/CBC/PKCS5PADDING";
     private static String secretKeyType = "AES";
+    private static String fSalt = "anySaltYouCanUseOfOn";
     private static byte[] ivCode = new byte[16];
     private static String secretKey = "yourSecretKey";
     public static String encrypt(String secretKey, String salt, String value) throws Exception {
@@ -194,10 +195,14 @@ public class HomeActivity extends AppCompatActivity {
 //        System.out.println("Cipher: " + cipherText);
         try {
             String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
-            Toast.makeText(HomeActivity.this,"Plain Text: " + plainText + "\nCipher Text: "+ cipherText +"\nDecrypted: " + dcrCipherText, Toast.LENGTH_SHORT).show();
+//            JSONObject obj = new JSONObject("{\\\"post_meal\\\": true, \\\"blood_sugar_level\\\": 148, \\\"breaths_per_minute\\\": 19, \\\"is_running\\\": false, \\\"breath_shortness_severity\\\": 0, \\\"cough_frequency\\\": 3, \\\"cough_severity\\\": 8, \\\"blood_pressure_sys\\\": 187, \\\"blood_pressure_dia\\\": 161, \\\"heart_rate\\\": 140, \\\"cholestorol\\\": 159, \\\"oxygen_saturation\\\": 95, \\\"lf/hf ratio\\\": 1.5194699163878969}");
+
+//            String x = "";
+//            Toast.makeText(HomeActivity.this,"Sample: "+obj.toString()+ "\nPlain Text: " + plainText + "\nCipher Text: "+ cipherText +"\nDecrypted: " + dcrCipherText, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 //        System.out.println("Decrypted: " + dcrCipherText);
 
 
@@ -350,9 +355,15 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            
+
                             JSONObject obj = new JSONObject(response.body().string());
 
+
+                            String cipherText =  obj.getString("Cipher");
+                            String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+//                            String json_string = obj.getString("Decrypted");
+
+                            obj = new JSONObject(dcrCipherText);
                             post_meal = obj.getString("post_meal");
                             blood_sugar_level = obj.getString("blood_sugar_level");
                             breaths_per_minute =  obj.getString("breaths_per_minute");
@@ -614,6 +625,8 @@ public class HomeActivity extends AppCompatActivity {
 
 //                            Toast.makeText(HomeActivity.this, obj.toString() + " "+ blood_sugar_level, Toast.LENGTH_LONG).show();
                         } catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

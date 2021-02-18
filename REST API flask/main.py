@@ -71,13 +71,12 @@ def encrypt_with_AES(message, secret_key, salt):
     return bytes.decode(cipher_bytes)
 
 def decrypt_with_AES(encoded, secret_key, salt):
-    get_private_keyate_key = get_private_key(secret_key, salt)
+    private_key = get_private_key(secret_key, salt)
     cipher_text = base64.b64decode(encoded)
     iv = cipher_text[:AES.block_size]
     cipher = AES.new(private_key, AES.MODE_CBC, iv)
     plain_bytes = unpad(cipher.decrypt(cipher_text[block_size:]));
     return bytes.decode(plain_bytes)
-
 
 
 class OpenAPI(Resource):
@@ -104,21 +103,32 @@ class OpenAPI(Resource):
 
 	def post(self):
 		print("OpenAPI invoked")
-		return {'post_meal': bool(random.getrandbits(1)),
-		'blood_sugar_level': random.randint(0,400),
-        'breaths_per_minute': random.randint(10,30),
-        'is_running': bool(random.getrandbits(1)),
-        'breath_shortness_severity': random.randint(0,10),
-        'cough_frequency': random.randint(0,10),
-        'cough_severity': random.randint(0,10),
-        
-        'blood_pressure_sys': random.randint(50,250),
-        'blood_pressure_dia': random.randint(50,250),
-        'heart_rate': random.randint(60,200),
-        'cholestorol': random.randint(60,200),
-        'oxygen_saturation': random.randint(90,100),
-	     'lf/hf ratio': round(random.uniform(1,2),2)
-        }
+		secret_key = "yourSecretKey"
+		salt = "anySaltYouCanUseOfOn"
+
+		
+		health_data = {'post_meal': bool(random.getrandbits(1)),
+			'blood_sugar_level': random.randint(0,400),
+	        'breaths_per_minute': random.randint(10,30),
+	        'is_running': bool(random.getrandbits(1)),
+	        'breath_shortness_severity': random.randint(0,10),
+	        'cough_frequency': random.randint(0,10),
+	        'cough_severity': random.randint(0,10),
+	        
+	        'blood_pressure_sys': random.randint(50,250),
+	        'blood_pressure_dia': random.randint(50,250),
+	        'heart_rate': random.randint(60,200),
+	        'cholestorol': random.randint(60,200),
+	        'oxygen_saturation': random.randint(90,100),
+	        'lf/hf ratio': round(random.uniform(1,2), 2)
+	        }
+		plain_text = json.dumps(health_data)
+		cipher = encrypt_with_AES(plain_text, secret_key, salt)
+		print("Cipher: " + cipher)
+		decrypted = decrypt_with_AES(cipher, secret_key, salt)
+		print("Decrypted " + decrypted)
+		
+		return {"Cipher":cipher}
         
 
 class EncryptionAES(Resource):
@@ -148,7 +158,7 @@ class EncryptionAES(Resource):
 		print("Cipher: " + cipher)
 		decrypted = decrypt_with_AES(cipher, secret_key, salt)
 		print("Decrypted " + decrypted)
-		
+
 		return {"Plain Text":plain_text,"Cipher":cipher,"Decrypted": decrypted}
 
 		 
