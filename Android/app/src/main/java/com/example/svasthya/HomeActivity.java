@@ -184,24 +184,24 @@ public class HomeActivity extends AppCompatActivity {
 //                .build();
 
 
-        String fSalt = "anySaltYouCanUseOfOn";
-        String plainText = "M0993000353";
-        String cipherText = null;
-        try {
-            cipherText = encrypt(secretKey, fSalt, plainText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        System.out.println("Cipher: " + cipherText);
-        try {
-            String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
-//            JSONObject obj = new JSONObject("{\\\"post_meal\\\": true, \\\"blood_sugar_level\\\": 148, \\\"breaths_per_minute\\\": 19, \\\"is_running\\\": false, \\\"breath_shortness_severity\\\": 0, \\\"cough_frequency\\\": 3, \\\"cough_severity\\\": 8, \\\"blood_pressure_sys\\\": 187, \\\"blood_pressure_dia\\\": 161, \\\"heart_rate\\\": 140, \\\"cholestorol\\\": 159, \\\"oxygen_saturation\\\": 95, \\\"lf/hf ratio\\\": 1.5194699163878969}");
-
-//            String x = "";
-//            Toast.makeText(HomeActivity.this,"Sample: "+obj.toString()+ "\nPlain Text: " + plainText + "\nCipher Text: "+ cipherText +"\nDecrypted: " + dcrCipherText, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String fSalt = "anySaltYouCanUseOfOn";
+//        String plainText = "M0993000353";
+//        String cipherText = null;
+//        try {
+//            cipherText = encrypt(secretKey, fSalt, plainText);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+////        System.out.println("Cipher: " + cipherText);
+//        try {
+//            String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+////            JSONObject obj = new JSONObject("{\\\"post_meal\\\": true, \\\"blood_sugar_level\\\": 148, \\\"breaths_per_minute\\\": 19, \\\"is_running\\\": false, \\\"breath_shortness_severity\\\": 0, \\\"cough_frequency\\\": 3, \\\"cough_severity\\\": 8, \\\"blood_pressure_sys\\\": 187, \\\"blood_pressure_dia\\\": 161, \\\"heart_rate\\\": 140, \\\"cholestorol\\\": 159, \\\"oxygen_saturation\\\": 95, \\\"lf/hf ratio\\\": 1.5194699163878969}");
+//
+////            String x = "";
+////            Toast.makeText(HomeActivity.this,"Sample: "+obj.toString()+ "\nPlain Text: " + plainText + "\nCipher Text: "+ cipherText +"\nDecrypted: " + dcrCipherText, Toast.LENGTH_SHORT).show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 //        System.out.println("Decrypted: " + dcrCipherText);
 

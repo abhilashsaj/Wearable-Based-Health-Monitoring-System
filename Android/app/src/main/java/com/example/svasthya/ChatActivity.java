@@ -44,6 +44,7 @@ public class ChatActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         addButton = (ImageView) findViewById(R.id.fab_img);
         listView = (ListView) findViewById(R.id.listView);
+        listView.setDivider(null);
 
 
         mAuth = FirebaseAuth.getInstance();

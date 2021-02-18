@@ -17,6 +17,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,10 +45,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 import in.gauriinfotech.commons.Commons;
 import okhttp3.Call;
@@ -126,11 +137,56 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
     private String stress ;
     FirebaseUser user;
 
+    private static String factoryInstance = "PBKDF2WithHmacSHA256";
+    private static String cipherInstance = "AES/CBC/PKCS5PADDING";
+    private static String secretKeyType = "AES";
+    private static String fSalt = "anySaltYouCanUseOfOn";
+    private static byte[] ivCode = new byte[16];
+    private static String secretKey = "yourSecretKey";
+    public static String encrypt(String secretKey, String salt, String value) throws Exception {
+        Cipher cipher = initCipher(secretKey, salt, Cipher.ENCRYPT_MODE);
+        byte[] encrypted = cipher.doFinal(value.getBytes());
+        byte[] cipherWithIv = addIVToCipher(encrypted);
+        return Base64.encodeToString(cipherWithIv,Base64.DEFAULT);
+    }
+    public static String decrypt(String secretKey, String salt, String encrypted) throws Exception {
+        Cipher cipher = initCipher(secretKey, salt, Cipher.DECRYPT_MODE);
+        byte[] original = cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT));
+        // unpad
+        byte[] originalWithoutIv = Arrays.copyOfRange(original, 16, original.length);
+        return new String(originalWithoutIv);
+    }
+    private static Cipher initCipher(String secretKey, String salt, int mode) throws Exception {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance(factoryInstance);
+        KeySpec spec = new PBEKeySpec(secretKey.toCharArray(), salt.getBytes(), 65536, 256);
+        SecretKey tmp = factory.generateSecret(spec);
+        SecretKeySpec skeySpec = new SecretKeySpec(tmp.getEncoded(), secretKeyType);
+        Cipher cipher = Cipher.getInstance(cipherInstance);
+        // Generating random IV
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(ivCode);
+
+        cipher.init(mode, skeySpec, new IvParameterSpec(ivCode));
+        return cipher;
+    }
+
+    private static byte[] addIVToCipher(byte[] encrypted) {
+        byte[] cipherWithIv = new byte[ivCode.length + encrypted.length];
+        System.arraycopy(ivCode, 0, cipherWithIv, 0, ivCode.length);
+        System.arraycopy(encrypted, 0, cipherWithIv, encrypted.length, encrypted.length);
+        return cipherWithIv;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_entry);
+
+        String fSalt = "anySaltYouCanUseOfOn";
+        String plainText = "M0993000353";
+        String cipherText = null;
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mStorageReference = FirebaseStorage.getInstance().getReference();
@@ -321,7 +377,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         finish();
     }
 
-    public void submitToServer(View view) {
+    public void submitToServer(View view) throws Exception {
 
 
 //        post_meal = post_meal_textview.getText().toString();
@@ -351,6 +407,12 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
         !cholestorol.trim().isEmpty() &&
                 !oxygen_saturation.trim().isEmpty() && !lf_hf_ratio.trim().isEmpty())
         {
+//            final String fSalt = "anySaltYouCanUseOfOn";
+//            String plainText = user.getDisplayName();
+//
+//            Log.e("Home",plainText);
+//            String cipherText2 = encrypt(secretKey, fSalt, plainText);
+
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("ëmail_id", user.getEmail())
@@ -373,7 +435,7 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
             Request request = new Request
                     .Builder()
                     .post(requestBody)
-                    .url("http://" + "192.168.1.36" + ":" + 5000 + "/prediction_models")
+                    .url("http://" + "192.168.1.36" + ":" + 5000 + "/manual_prediction_models")
                     .build();
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
@@ -395,6 +457,14 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(response.body().string());
+                                Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
+
+
+//                                String cipherText =  obj.getString("Cipher");
+//                                String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+////                            String json_string = obj.getString("Decrypted");
+//
+//                                obj = new JSONObject(dcrCipherText);
                                 diabetes = obj.getString("diabetes");
                                 bronchi = obj.getString("bronchi");
                                 hypoxemia =  obj.getString("hypoxemia");
@@ -502,6 +572,8 @@ public class ManualEntryActivity extends AppCompatActivity implements AdapterVie
 
                                 Toast.makeText(ManualEntryActivity.this, obj.toString(), Toast.LENGTH_LONG).show();
                             } catch (IOException | JSONException e) {
+                                e.printStackTrace();
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
