@@ -48,6 +48,38 @@ except SMTPException:
 	print("Error: unable to send email")
 
 
+import base64
+import hashlib
+import json
+
+from Crypto import Random
+from Crypto.Cipher import AES
+
+block_size = 16
+pad = lambda s: s + (block_size - len(s) % block_size) * chr(block_size - len(s) % block_size)
+unpad = lambda s: s[0:-ord(s[-1:])]
+iv = Random.new().read(AES.block_size) # Random IV
+
+def get_private_key(secret_key, salt):
+    return hashlib.pbkdf2_hmac('SHA256', secret_key.encode(), salt.encode(), 65536, 32)
+
+def encrypt_with_AES(message, secret_key, salt):
+    private_key = get_private_key(secret_key, salt)
+    message = pad(message)
+    cipher = AES.new(private_key, AES.MODE_CBC, iv)
+    cipher_bytes = base64.b64encode(iv + cipher.encrypt(message))
+    return bytes.decode(cipher_bytes)
+
+def decrypt_with_AES(encoded, secret_key, salt):
+    get_private_keyate_key = get_private_key(secret_key, salt)
+    cipher_text = base64.b64decode(encoded)
+    iv = cipher_text[:AES.block_size]
+    cipher = AES.new(private_key, AES.MODE_CBC, iv)
+    plain_bytes = unpad(cipher.decrypt(cipher_text[block_size:]));
+    return bytes.decode(plain_bytes)
+
+
+
 class OpenAPI(Resource):
 
 	def get(self):
@@ -88,6 +120,44 @@ class OpenAPI(Resource):
 	     'lf/hf ratio': round(random.uniform(1,2),2)
         }
         
+
+class EncryptionAES(Resource):
+	
+	def get(self):	
+		secret_key = "yourSecretKey"
+		salt = "anySaltYouCanUseOfOn"
+
+		
+		health_data = {'post_meal': bool(random.getrandbits(1)),
+			'blood_sugar_level': random.randint(0,400),
+	        'breaths_per_minute': random.randint(10,30),
+	        'is_running': bool(random.getrandbits(1)),
+	        'breath_shortness_severity': random.randint(0,10),
+	        'cough_frequency': random.randint(0,10),
+	        'cough_severity': random.randint(0,10),
+	        
+	        'blood_pressure_sys': random.randint(50,250),
+	        'blood_pressure_dia': random.randint(50,250),
+	        'heart_rate': random.randint(60,200),
+	        'cholestorol': random.randint(60,200),
+	        'oxygen_saturation': random.randint(90,100),
+	        'lf/hf ratio': random.uniform(1,2)
+	        }
+		plain_text = json.dumps(health_data)
+		cipher = encrypt_with_AES(plain_text, secret_key, salt)
+		print("Cipher: " + cipher)
+		decrypted = decrypt_with_AES(cipher, secret_key, salt)
+		print("Decrypted " + decrypted)
+		
+		return {"Plain Text":plain_text,"Cipher":cipher,"Decrypted": decrypted}
+
+		 
+
+
+
+
+
+
 
 class PredictionModels(Resource):
 
@@ -268,7 +338,7 @@ class PredictionModels(Resource):
 
 api.add_resource(OpenAPI, "/")
 api.add_resource(PredictionModels, "/prediction_models")
-
+api.add_resource(EncryptionAES, "/crypto_test")
 if __name__ == "__main__":
 	# app.run(debug=True)
 	app.run(host="0.0.0.0", port=5000, debug=True)

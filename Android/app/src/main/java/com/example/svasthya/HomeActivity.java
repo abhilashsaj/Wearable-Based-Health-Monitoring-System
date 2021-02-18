@@ -43,7 +43,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,6 +63,16 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+//import org.apache.commons.codec.binary.Base64;
+import  android.util.Base64;
+
+
 public class HomeActivity extends AppCompatActivity {
 
     private String url = "http://" + "192.168.1.36" + ":" + 5000 + "/";
@@ -67,6 +80,9 @@ public class HomeActivity extends AppCompatActivity {
     private MediaType mediaType;
     private RequestBody requestBody;
     private Button connect;
+
+    Handler h;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String post_meal;
     private String blood_sugar_level;
@@ -115,7 +131,44 @@ public class HomeActivity extends AppCompatActivity {
     private String stress  = "";
     FirebaseUser user;
 
+    private static String factoryInstance = "PBKDF2WithHmacSHA256";
+    private static String cipherInstance = "AES/CBC/PKCS5PADDING";
+    private static String secretKeyType = "AES";
+    private static byte[] ivCode = new byte[16];
+    private static String secretKey = "yourSecretKey";
+    public static String encrypt(String secretKey, String salt, String value) throws Exception {
+        Cipher cipher = initCipher(secretKey, salt, Cipher.ENCRYPT_MODE);
+        byte[] encrypted = cipher.doFinal(value.getBytes());
+        byte[] cipherWithIv = addIVToCipher(encrypted);
+        return Base64.encodeToString(cipherWithIv,Base64.DEFAULT);
+    }
+    public static String decrypt(String secretKey, String salt, String encrypted) throws Exception {
+        Cipher cipher = initCipher(secretKey, salt, Cipher.DECRYPT_MODE);
+        byte[] original = cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT));
+        // unpad
+        byte[] originalWithoutIv = Arrays.copyOfRange(original, 16, original.length);
+        return new String(originalWithoutIv);
+    }
+    private static Cipher initCipher(String secretKey, String salt, int mode) throws Exception {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance(factoryInstance);
+        KeySpec spec = new PBEKeySpec(secretKey.toCharArray(), salt.getBytes(), 65536, 256);
+        SecretKey tmp = factory.generateSecret(spec);
+        SecretKeySpec skeySpec = new SecretKeySpec(tmp.getEncoded(), secretKeyType);
+        Cipher cipher = Cipher.getInstance(cipherInstance);
+        // Generating random IV
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(ivCode);
 
+        cipher.init(mode, skeySpec, new IvParameterSpec(ivCode));
+        return cipher;
+    }
+
+    private static byte[] addIVToCipher(byte[] encrypted) {
+        byte[] cipherWithIv = new byte[ivCode.length + encrypted.length];
+        System.arraycopy(ivCode, 0, cipherWithIv, 0, ivCode.length);
+        System.arraycopy(encrypted, 0, cipherWithIv, encrypted.length, encrypted.length);
+        return cipherWithIv;
+    }
 
 
     @Override
@@ -130,7 +183,25 @@ public class HomeActivity extends AppCompatActivity {
 //                .build();
 
 
-//        Toast.makeText(HomeActivity.this, fitnessOptions.toString(), Toast.LENGTH_SHORT).show();
+        String fSalt = "anySaltYouCanUseOfOn";
+        String plainText = "M0993000353";
+        String cipherText = null;
+        try {
+            cipherText = encrypt(secretKey, fSalt, plainText);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        System.out.println("Cipher: " + cipherText);
+        try {
+            String dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+            Toast.makeText(HomeActivity.this,"Plain Text: " + plainText + "\nCipher Text: "+ cipherText +"\nDecrypted: " + dcrCipherText, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        System.out.println("Decrypted: " + dcrCipherText);
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -223,7 +294,7 @@ public class HomeActivity extends AppCompatActivity {
 
         postRequest("your message here", url);
 
-        final Handler h = new Handler();
+        h = new Handler();
         h.post(new Runnable() {
             @Override
             public void run() {
@@ -279,6 +350,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+                            
                             JSONObject obj = new JSONObject(response.body().string());
 
                             post_meal = obj.getString("post_meal");
