@@ -129,6 +129,7 @@ public class HomeActivity extends AppCompatActivity {
     private String asthma = "";
     private String chd  = "";
     private String stress  = "";
+    String status = "";
     FirebaseUser user;
 
     private static String factoryInstance = "PBKDF2WithHmacSHA256";
@@ -465,7 +466,7 @@ public class HomeActivity extends AppCompatActivity {
                                                 asthma =  obj.getString("asthma");
                                                 chd =  obj.getString("chd");
                                                 stress =  obj.getString("stress");
-                                                String status = obj.getString("status");
+                                                status = obj.getString("status");
 
                                                 diabetes_textview.setText(diabetes);
                                                 bronchi_textview.setText(bronchi);
@@ -554,6 +555,7 @@ public class HomeActivity extends AppCompatActivity {
                                     Map<String, Object> healthParam = new HashMap<>();
 
                                     healthParam.put( "post_meal",post_meal);
+                                    healthParam.put( "status",status);
                                     healthParam.put( "blood_sugar_level",blood_sugar_level);
                                     healthParam.put(   "breaths_per_minute",breaths_per_minute);
                                     healthParam.put("is_running",is_running);

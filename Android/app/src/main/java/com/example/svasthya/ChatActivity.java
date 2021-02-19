@@ -89,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                    } 
+                    }
                     else if(message.contains("file")){
 
                         String[] arrOfStr = message.split(" ", 2);

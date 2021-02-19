@@ -36,16 +36,27 @@ from flask_cors import CORS
 # from sklearn.ensemble import VotingClassifier
 # from sklearn.metrics import roc_curve, roc_auc_score
 
+from flask_mail import Mail, Message
+
 app = Flask(__name__)
+mail= Mail(app)
 # CORS(app)
 api = Api(app)
 
-try:
-	server = smtplib.SMTP('smtp.gmail.com',587)
-	server.starttls()
-	server.login('abhilashsajtest2@gmail.com','tcsinframind')
-except SMTPException:
-	print("Error: unable to send email")
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'abhilashsajtest2@gmail.com'
+app.config['MAIL_PASSWORD'] = 'tcsinframind'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+# try:
+# 	server = smtplib.SMTP('smtp.gmail.com',587)
+# 	server.starttls()
+# 	server.login('abhilashsajtest2@gmail.com','tcsinframind')
+# except SMTPException:
+# 	print("Error: unable to send email")
 
 
 import base64
@@ -335,10 +346,15 @@ class PredictionModels(Resource):
 		
 
 
-		try: 			
+		try: 
+			email_id = request.form['email_id']			
+			msg = Message('Warning!!!', sender = 'abhilashsajtest2@gmail.com', recipients = [email_id])
+			msg.body = message
+			mail.send(msg)
+			print("mail sent successfully")
 			# print(int(request.form['blood_sugar_level']))
-			email_message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
-			email_id = request.form['email_id']
+			# email_message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
+			# email_id = request.form['email_id']
 			# print("hii")
 			# server.sendmail('abhilashsajtest2@gmail.com',email, email_message)
 			# print(email_message)
