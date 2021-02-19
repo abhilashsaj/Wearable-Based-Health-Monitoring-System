@@ -350,14 +350,10 @@ class PredictionModels(Resource):
 			email_id = request.form['email_id']			
 			msg = Message('Warning!!!', sender = 'abhilashsajtest2@gmail.com', recipients = [email_id])
 			msg.body = message
-			mail.send(msg)
-			print("mail sent successfully")
-			# print(int(request.form['blood_sugar_level']))
-			# email_message = 'Subject: {}\n\n{}'.format("Warning!!! ", message)
-			# email_id = request.form['email_id']
-			# print("hii")
-			# server.sendmail('abhilashsajtest2@gmail.com',email, email_message)
-			# print(email_message)
+			# mail.send(msg)
+			# print("mail sent successfully")
+
+
 		except smtplib.SMTPException:
 			print("An exception occurred email couldnt be send")
 
@@ -502,6 +498,6 @@ api.add_resource(ManualPredictionModels, "/manual_prediction_models")
 
 if __name__ == "__main__":
 	# app.run(debug=True)
-	app.run(host="0.0.0.0", port=5000, debug=True)
+	app.run(debug=True)
 
 

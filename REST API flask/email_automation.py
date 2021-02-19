@@ -14,6 +14,8 @@ server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
 server.login('abhilashsajtest2@gmail.com','tcsinframind')
 
+# manual 
+
 docs = db.collection(u'users').stream()
 for doc in docs:
 	user_doc = doc.to_dict()
@@ -35,7 +37,9 @@ for doc in docs:
 		bronchi = "\nBronchi: " + user_health['bronchi']
 		asthma = "\nAsthma: " + user_health['asthma']
 
-		health_status = "\nHealth Status: \n" +chd+ diabetes+hypoxemia+ stress+ bronchi+asthma
+		summary = "\n\nSummary\n" + user_health['status']
+
+		health_status = "\nHealth Status: \n" +chd+ diabetes+hypoxemia+ stress+ bronchi+asthma +summary
 
 		message = """From: Abhilash Saj <abhilashsajtest2@gmail.com>
 		To: User <%s>
@@ -54,6 +58,9 @@ for doc in docs:
 	else:
 		print(u'No such document!')
 
+
+# #Scheduling code
+
 # from datetime import datetime, timedelta
 # from threading import Timer
 
@@ -63,7 +70,7 @@ for doc in docs:
 
 # secs=delta_t.total_seconds()
 
-def hello_world():
+def healthSummary():
 	docs = db.collection(u'users').stream()
 	for doc in docs:
 		user_doc = doc.to_dict()
@@ -103,38 +110,7 @@ def hello_world():
 		else:
 			print(u'No such document!')
 
-# t = Timer(secs, hello_world)
+# t = Timer(secs, healthSummary)
 # t.start()
 
 
-
-
-
-    # print(doc.id)
-
-# print(user_ids)
-
-
-
-
-
-
-
-# for uid in user_ids:
-# 	collections = db.collection('users').document(uid).collection('health_data').document('05-02-2021').collections()
-# 	for collection in collections:
-# 	    for doc in collection.stream():
-# 	        print(f'{doc.id} => {doc.to_dict()}')
-# 	        print(doc.id)
-
-
-
-# for uid in user_ids:
-# 	collections = db.collection('users').document(uid).collections()
-# 	for collection in collections:
-# 	    for doc in collection.stream():
-# 	        print(f'{doc.id} => {doc.to_dict()}')
-# 	        print(doc.id)
-
-# cred = credentials.Certificate("key.json")
-# firebase_admin.initialize_app(cred)
