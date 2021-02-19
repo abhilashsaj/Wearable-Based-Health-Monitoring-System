@@ -17,7 +17,6 @@ beautifulsoup4==4.6.3
 bidict==0.21.2
 biosppy==0.6.1
 bitarray==0.8.3
-bkcharts==0.2
 blaze==0.11.3
 bleach==3.0.2
 blinker==1.4
