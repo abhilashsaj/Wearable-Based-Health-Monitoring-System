@@ -498,6 +498,6 @@ api.add_resource(ManualPredictionModels, "/manual_prediction_models")
 
 if __name__ == "__main__":
 	# app.run(debug=True)
-	app.run(threaded=True, port = int(os.environ.get('PORT', 5000)))
+	app.run(host='0.0.0.0',threaded=True)
 
 
