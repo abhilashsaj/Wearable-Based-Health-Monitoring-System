@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "189721362062",
+    "project_id": "inframind-finals",
+    "storage_bucket": "inframind-finals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189721362062:android:9908bbff994682f4e293df",
+        "android_client_info": {
+          "package_name": "com.example.inframindfinals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189721362062-hgfse0m55ngavktsl5i1mua0vbls6e8o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.inframindfinals",
+            "certificate_hash": "19e61db89124733d249daf0ed52428b2f812de35"
+          }
+        },
+        {
+          "client_id": "189721362062-4one0jqt4p1383j6r0actsmn9jd07c80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO9zp898LyPELskhAwjRPLdFt3-QpPFcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189721362062-4one0jqt4p1383j6r0actsmn9jd07c80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
