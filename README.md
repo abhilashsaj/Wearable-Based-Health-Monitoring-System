@@ -1,4 +1,4 @@
-# TCS-Inframind
+# TCS-Inframind - Wearable based Employee Health Monitoring System
 
 ## Sustainability & Wellness
 
